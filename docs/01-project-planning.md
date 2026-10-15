@@ -186,7 +186,7 @@ At launch, the only real cost would be a paid AI model for real papers (roughly 
 
 ### Roles
 
-The team has six roles, and each member takes one. The assignment below is **temporary** and may change once the team confirms it.
+The team has six roles, and each member takes one.
 
 | # | Role | Member | Main responsibilities | Best fit for someone who… |
 |---|---|---|---|---|

@@ -72,7 +72,7 @@ BloodLink is a community website that sends a request only to donors who match t
 | Zeyad Mohammed Mohammed | Frontend: Requester & Hospital |
 | Marawan Hesham Tolba | UI/UX & QA |
 
-Roles are temporary. Full responsibilities are in the [planning document](docs/01-project-planning.md#3-task-assignment--roles).
+Full responsibilities are in the [planning document](docs/01-project-planning.md#3-task-assignment--roles).
 
 ## Repository structure
 
