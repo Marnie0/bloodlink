@@ -2,6 +2,7 @@
 
 **Project:** BloodLink | رابط الحياة\
 **Program:** DEPI (Digital Egypt Pioneers Initiative), 2026\
+**Track:** Software Development - React Frontend Web Developer\
 **Team:** Ibrahim Hassan Anwar, Khaled Atef Salah, Mohammed Eslam Mohammed, Hager Waleed Shaker, Zeyad Mohammed Mohammed, Marawan Hesham Tolba\
 **Deadline:** 16 Oct 2026
 

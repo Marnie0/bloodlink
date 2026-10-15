@@ -2,6 +2,7 @@
 
 **Project:** BloodLink | رابط الحياة\
 **Program:** DEPI (Digital Egypt Pioneers Initiative), 2026\
+**Track:** Software Development - React Frontend Web Developer\
 **Team:** Ibrahim Hassan Anwar, Khaled Atef Salah, Mohammed Eslam Mohammed, Hager Waleed Shaker, Zeyad Mohammed Mohammed, Marawan Hesham Tolba\
 **Deadline:** 16 Oct 2026
 
@@ -10,10 +11,9 @@
 1. [Background](#1-background)
 2. [Existing solutions](#2-existing-solutions)
 3. [The gap BloodLink fills](#3-the-gap-bloodlink-fills)
-4. [Feedback & Evaluation](#4-feedback--evaluation)
+4. [What we learned from them](#4-what-we-learned-from-them)
 5. [Suggested Improvements](#5-suggested-improvements)
-6. [Final Grading Criteria](#6-final-grading-criteria)
-7. [References](#7-references)
+6. [References](#6-references)
 
 ---
 
@@ -46,28 +46,20 @@ None of the solutions above combines all of the following. BloodLink does:
 | Is it safe? | Phone numbers stay hidden until a donor accepts, meetings happen only at the hospital, money is never allowed, and there's a report button. |
 | Who is responsible medically? | Always the hospital. BloodLink only connects people. |
 
-## 4. Feedback & Evaluation
+## 4. What we learned from them
 
-This section records the lecturer's assessment of the project. It is filled in after each review.
-
-| Date | Phase reviewed | Lecturer's feedback | Our action | Status |
-|---|---|---|---|---|
-| _dd/mm/2026_ | Idea & planning | | | |
-| | | | | |
-
-### Our self-evaluation (before the lecturer's review)
-
-| Area | Strength | Weakness we know about |
+| Solution | Lesson | How BloodLink uses it |
 |---|---|---|
-| Idea | Solves a real, common problem in Egypt | Real partner hospitals are not signed yet, so the demo uses fictional ones |
-| Trust model | Clear badges that never over-promise | The AI can be fooled by a well-made fake paper |
-| Scope | A fixed core with checkpoints and a freeze date | Six people on one codebase need strong coordination |
-| Cost | Runs at $0 on free tiers for the demo | Free hosting sleeps after 15 minutes without traffic |
-| Course fit | Uses the whole MERN course: React, TypeScript, Tailwind, Node, MongoDB, Docker, testing, prompt engineering | Push notifications and geo queries are new to the team |
+| Facebook and WhatsApp posts | People already share requests on social media, and that reach is valuable | A WhatsApp share card that links back to the checked request |
+| Facebook Blood Donations | Working with official bodies builds trust | Partner hospitals confirm papers and give the **Verified** badge |
+| HOPE / GiveMeHope | Matching by blood type and distance works | Matching by compatibility, distance waves (5 km, then 15 km) and trust level |
+| HOPE / GiveMeHope | SMS reaches people without smartphones | SMS alerts are planned as a future improvement |
+| Law 3andak Dam | Its main weakness was that nothing could be verified | Every request needs an official hospital paper |
+| University projects | They focus on blood banks | BloodLink connects a specific patient with nearby donors |
 
 ## 5. Suggested Improvements
 
-Improvements we have already planned, and ideas for after the course. Suggestions from the lecturer will be added to this table.
+Improvements we have already planned, and ideas for after the course.
 
 | # | Improvement | Why | When |
 |---|---|---|---|
@@ -80,19 +72,7 @@ Improvements we have already planned, and ideas for after the course. Suggestion
 | 7 | Blood stock levels at partner hospitals | Donors can help before an emergency | After the course |
 | 8 | Mobile app (Android and iPhone), built on the same backend | More reliable notifications, especially on iPhone | Future, not part of this project |
 
-## 6. Final Grading Criteria
-
-DEPI grades the project on documentation, implementation, testing and presentation. We will fill in the exact marks once the lecturer announces them.
-
-| Area | What is graded | Marks |
-|---|---|---|
-| Documentation | Phases 1 to 4 and the final reports | _TBA_ |
-| Implementation | Source code quality, version control, README, deployed website | _TBA_ |
-| Testing | Test plan, automated tests, bug reports | _TBA_ |
-| Presentation | Slides, live demo, video, infographic | _TBA_ |
-| **Total** | | _TBA_ |
-
-## 7. References
+## 6. References
 
 1. AABB, "Voluntary Donations Now Account for More Than 85% of Global Blood Collections, WHO Reports," June 2026. https://www.aabb.org/news-resources/news/article/2026/06/17/voluntary-donations-now-account-for-more-than-85--of-global-blood-collections--who-reports
 2. Darbandi A. et al., "Status of blood transfusion in World Health Organization-Eastern Mediterranean Region (WHO-EMR): Successes and challenges," *Transfusion and Apheresis Science*, 56(3):448-453, 2017. https://pubmed.ncbi.nlm.nih.gov/28550979/

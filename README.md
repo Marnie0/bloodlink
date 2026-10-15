@@ -3,7 +3,8 @@
 **A website connecting people who need blood with nearby donors in Egypt.**
 Hospital papers are checked, donor and patient meet only at the hospital, and no money is ever involved.
 
-> **Status:** Phases 1 to 3 submitted. Next: System Analysis & Design (DEPI capstone, 2026)
+> **DEPI 2026 capstone** · Track: Software Development - React Frontend Web Developer\
+> **Status:** Phases 1 to 3 submitted. Next: System Analysis & Design
 
 ---
 
@@ -36,6 +37,8 @@ BloodLink is a community website that sends a request only to donors who match t
 | Admin | Reviews unclear papers, handles reports, bans abusers |
 
 ## Project status
+
+📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: phases 1 to 3 in one file.
 
 | # | Phase | Deadline | Status |
 |---|---|---|---|
@@ -76,11 +79,11 @@ Roles are temporary. Full responsibilities are in the [planning document](docs/0
 ```
 bloodlink/
 ├── README.md
+├── BloodLink_Project_Documentation.pdf   # phases 1 to 3 in one PDF
 └── docs/
     ├── 01-project-planning.md   # proposal, plan, roles, risks, KPIs
-    ├── 02-literature-review.md  # existing solutions, feedback, improvements
-    ├── 03-requirements.md       # stakeholders, user stories, use cases, requirements
-    └── pdf/                     # PDF copies of each document
+    ├── 02-literature-review.md  # similar solutions, comparison, sources
+    └── 03-requirements.md       # stakeholders, user stories, use cases, requirements
 ```
 
 The `client/` and `server/` folders, setup steps and the demo link will be added in the implementation phase.
