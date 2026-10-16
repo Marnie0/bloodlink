@@ -118,7 +118,7 @@ gantt
 
 | Sprint | Dates | Goal | Done when |
 |---|---|---|---|
-| S1 Foundation | 17 to 23 Oct | Repo, TypeScript, Docker, deploy, data models, login with roles, Arabic UI kit | The website is deployed and a user can log in with a role |
+| S1 Foundation | 17 to 23 Oct | Repo, Docker, deploy, data models, login with roles, Arabic UI kit | The website is deployed and a user can log in with a role |
 | S2 Core data | 24 to 30 Oct | Donor signup and certificate upload, request form and paper upload, partner confirmation | A request becomes active after the hospital confirms it |
 | S3 Matching & alerts | 31 Oct to 6 Nov | Matching with tests, AI paper check, push notifications, accept or decline, live progress | **Checkpoint 1:** the whole flow works roughly |
 | S4 Close the loop | 7 to 13 Nov | QR check-in at partner hospitals, self-confirmation elsewhere, waves, admin tools | **Checkpoint 2:** all core features are done |

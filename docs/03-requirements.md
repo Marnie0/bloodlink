@@ -182,7 +182,7 @@ Format: _As a [role], I want [goal], so that [benefit]._
 | NFR-11 | Accessibility | Lighthouse accessibility score ≥ 90, visible keyboard focus, readable contrast | Lighthouse |
 | NFR-12 | Reliability | Uptime ≥ 99 % during demo week | Uptime monitor |
 | NFR-13 | Reliability | If the AI service fails, the website switches to mock mode or the review queue, never to an error page | Test with the AI turned off |
-| NFR-14 | Maintainability | TypeScript on both sides, ESLint and Prettier, small reviewed pull requests | CI |
+| NFR-14 | Maintainability | TypeScript on the backend, JavaScript on the frontend, ESLint and Prettier on both, small reviewed pull requests | CI |
 | NFR-15 | Testability | ≥ 70 % test coverage of core logic (matching, trust badges, request states) | Jest coverage report |
 | NFR-16 | Portability | The whole website runs locally with `docker compose up` | Fresh-laptop test |
 | NFR-17 | Cost | The demo runs at $0 on free tiers | Monthly check of all accounts |
