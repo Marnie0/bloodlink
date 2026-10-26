@@ -25,6 +25,8 @@ import AdminPapersPage from '@/features/admin/AdminPapersPage';
 import AdminReportsPage from '@/features/admin/AdminReportsPage';
 import AdminHospitalsPage from '@/features/admin/AdminHospitalsPage';
 
+import KitPage from '@/dev/KitPage';
+
 export default function App() {
   return (
     <Routes>
@@ -52,6 +54,8 @@ export default function App() {
         <Route path="/admin/papers" element={<AdminPapersPage />} />
         <Route path="/admin/reports" element={<AdminReportsPage />} />
         <Route path="/admin/hospitals" element={<AdminHospitalsPage />} />
+
+        {import.meta.env.DEV && <Route path="/kit" element={<KitPage />} />}
 
         <Route path="*" element={<NotFoundPage />} />
       </Route>
