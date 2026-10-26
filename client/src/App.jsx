@@ -1,32 +1,60 @@
+import { Navigate, Route, Routes } from 'react-router-dom';
+import AppLayout from '@/components/layout/AppLayout';
+
+import HomePage from '@/features/home/HomePage';
+import SignupPage from '@/features/auth/SignupPage';
+import LoginPage from '@/features/auth/LoginPage';
+import TermsPage from '@/features/static/TermsPage';
+import NotFoundPage from '@/features/static/NotFoundPage';
+
+import DonorRequestsPage from '@/features/donor/DonorRequestsPage';
+import RequestDetailsPage from '@/features/donor/RequestDetailsPage';
+import CertificatePage from '@/features/donor/CertificatePage';
+import DonationHistoryPage from '@/features/donor/DonationHistoryPage';
+
+import NewRequestPage from '@/features/requester/NewRequestPage';
+import RequestProgressPage from '@/features/requester/RequestProgressPage';
+import ConfirmDonationPage from '@/features/requester/ConfirmDonationPage';
+
+import HospitalDashboardPage from '@/features/hospital/HospitalDashboardPage';
+import HospitalPapersPage from '@/features/hospital/HospitalPapersPage';
+import HospitalJoinPage from '@/features/hospital/HospitalJoinPage';
+
+import AdminDashboardPage from '@/features/admin/AdminDashboardPage';
+import AdminPapersPage from '@/features/admin/AdminPapersPage';
+import AdminReportsPage from '@/features/admin/AdminReportsPage';
+import AdminHospitalsPage from '@/features/admin/AdminHospitalsPage';
+
 export default function App() {
   return (
-    <main className="mx-auto grid max-w-3xl gap-6 p-8">
-      <h1 className="text-3xl">رابط الحياة</h1>
-      <p className="text-ink-2">إذا ظهرت هذه الصفحة بخط عربي وألوان BloodLink، فالخطوة ٤ تعمل.</p>
+    <Routes>
+      <Route element={<AppLayout />}>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/terms" element={<TermsPage />} />
 
-      <div className="rounded-card bg-surface shadow-card p-6">
-        <h2 className="text-xl">بطاقة تجريبية</h2>
-        <p className="text-small text-ink-3">rounded-card · bg-surface · shadow-card</p>
-      </div>
+        <Route path="/donor/requests" element={<DonorRequestsPage />} />
+        <Route path="/donor/requests/:id" element={<RequestDetailsPage />} />
+        <Route path="/donor/certificate" element={<CertificatePage />} />
+        <Route path="/donor/history" element={<DonationHistoryPage />} />
 
-      <div className="flex flex-wrap gap-3">
-        <button className="bg-urgent rounded-field font-head px-5 py-2.5 font-bold text-white">
-          تقديم طلب دم
-        </button>
-        <button className="rounded-field bg-navy font-head px-5 py-2.5 font-bold text-white">زر ثانوي</button>
-        <span className="bg-ok-lt text-small text-ok rounded-full px-3 py-1 font-bold">موثّق</span>
-        <span className="bg-warn-lt text-small text-warn rounded-full px-3 py-1 font-bold">يبدو سليمًا</span>
-      </div>
+        <Route path="/requests/new" element={<Navigate to="/requests/new/1" replace />} />
+        <Route path="/requests/new/:step" element={<NewRequestPage />} />
+        <Route path="/requests/:id" element={<RequestProgressPage />} />
+        <Route path="/requests/:id/confirm" element={<ConfirmDonationPage />} />
 
-      <button
-        className="rounded-field border-line w-fit border px-4 py-2"
-        onClick={() => {
-          const html = document.documentElement;
-          html.dataset.theme = html.dataset.theme === 'dark' ? 'light' : 'dark';
-        }}
-      >
-        تبديل الوضع الليلي
-      </button>
-    </main>
+        <Route path="/hospital" element={<HospitalDashboardPage />} />
+        <Route path="/hospital/papers" element={<HospitalPapersPage />} />
+        <Route path="/hospital/join" element={<HospitalJoinPage />} />
+
+        <Route path="/admin" element={<AdminDashboardPage />} />
+        <Route path="/admin/papers" element={<AdminPapersPage />} />
+        <Route path="/admin/reports" element={<AdminReportsPage />} />
+        <Route path="/admin/hospitals" element={<AdminHospitalsPage />} />
+
+        <Route path="*" element={<NotFoundPage />} />
+      </Route>
+    </Routes>
   );
 }
