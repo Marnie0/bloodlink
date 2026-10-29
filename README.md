@@ -82,10 +82,9 @@ bloodlink/
 ├── BloodLink_Project_Documentation.pdf   # all documents in one PDF
 ├── client/                       # React + Vite + Tailwind frontend (JavaScript)
 │   └── src/
-│       ├── api/                  # functions pages call for data
-│       ├── mocks/                # sample data until the backend is ready
 │       ├── components/           # shared layout and UI components
-│       └── features/             # pages, one folder per area
+│       ├── features/             # pages, one folder per area
+│       └── App.jsx               # all routes
 └── docs/
     ├── 01-project-planning.md    # proposal, plan, roles, risks, KPIs
     ├── 02-literature-review.md   # similar solutions, comparison, sources
