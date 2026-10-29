@@ -54,7 +54,7 @@ BloodLink is a community website that sends a request only to donors who match t
 
 | Layer | Tools |
 |---|---|
-| Frontend | React (JavaScript), React Compiler, React Router, Tailwind CSS v4 (Arabic RTL), Vite |
+| Frontend | React (JavaScript), React Compiler, React Router, Tailwind CSS v4 + daisyUI (Arabic RTL), Vite |
 | Backend | Node.js, Express, TypeScript, Socket.io, Web Push |
 | Database | MongoDB (Mongoose, geo queries) |
 | AI paper check | Vision AI API behind one `checkPaper()` function (mock / free / paid) |
