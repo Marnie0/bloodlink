@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
-import Layout from '@/components/layout/Layout';
+import Header from '@/components/layout/Header';
+import Footer from '@/components/layout/Footer';
 import HomePage from '@/pages/home/HomePage';
 import SignupPage from '@/pages/auth/SignupPage';
 import LoginPage from '@/pages/auth/LoginPage';
@@ -22,41 +23,45 @@ import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
 
 export default function App() {
   return (
-    <Routes>
-      <Route element={<Layout />}>
-        <Route index element={<HomePage />} />
-        <Route path="signup" element={<SignupPage />} />
-        <Route path="login" element={<LoginPage />} />
-        <Route path="terms" element={<TermsPage />} />
+    <>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="signup" element={<SignupPage />} />
+          <Route path="login" element={<LoginPage />} />
+          <Route path="terms" element={<TermsPage />} />
 
-        <Route path="donor">
-          <Route path="requests" element={<DonorRequestsPage />} />
-          <Route path="requests/:id" element={<RequestDetailsPage />} />
-          <Route path="certificate" element={<CertificatePage />} />
-          <Route path="history" element={<DonationHistoryPage />} />
-        </Route>
+          <Route path="donor">
+            <Route path="requests" element={<DonorRequestsPage />} />
+            <Route path="requests/:id" element={<RequestDetailsPage />} />
+            <Route path="certificate" element={<CertificatePage />} />
+            <Route path="history" element={<DonationHistoryPage />} />
+          </Route>
 
-        <Route path="requests">
-          <Route path="new/:step?" element={<NewRequestPage />} />
-          <Route path=":id" element={<RequestProgressPage />} />
-          <Route path=":id/confirm" element={<ConfirmDonationPage />} />
-        </Route>
+          <Route path="requests">
+            <Route path="new/:step?" element={<NewRequestPage />} />
+            <Route path=":id" element={<RequestProgressPage />} />
+            <Route path=":id/confirm" element={<ConfirmDonationPage />} />
+          </Route>
 
-        <Route path="hospital">
-          <Route index element={<HospitalDashboardPage />} />
-          <Route path="papers" element={<HospitalPapersPage />} />
-          <Route path="join" element={<HospitalJoinPage />} />
-        </Route>
+          <Route path="hospital">
+            <Route index element={<HospitalDashboardPage />} />
+            <Route path="papers" element={<HospitalPapersPage />} />
+            <Route path="join" element={<HospitalJoinPage />} />
+          </Route>
 
-        <Route path="admin">
-          <Route index element={<AdminDashboardPage />} />
-          <Route path="papers" element={<AdminPapersPage />} />
-          <Route path="reports" element={<AdminReportsPage />} />
-          <Route path="hospitals" element={<AdminHospitalsPage />} />
-        </Route>
+          <Route path="admin">
+            <Route index element={<AdminDashboardPage />} />
+            <Route path="papers" element={<AdminPapersPage />} />
+            <Route path="reports" element={<AdminReportsPage />} />
+            <Route path="hospitals" element={<AdminHospitalsPage />} />
+          </Route>
 
-        <Route path="*" element={<NotFoundPage />} />
-      </Route>
-    </Routes>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      <Footer />
+    </>
   );
 }
