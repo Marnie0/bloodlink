@@ -149,7 +149,7 @@ gantt
 | **Available** | **422** |
 | Core development (estimates × 1.5 safety factor) | 167 |
 | Planned extras (× 1.5) | 59 |
-| Code reviews and integration | 40 |
+| Integration and testing | 40 |
 | Documentation for all phases (× 1.5) | 60 |
 | Research, presentation, video, rehearsals (× 1.5) | 30 |
 | **Planned** | **356** |
@@ -157,14 +157,14 @@ gantt
 
 The spare hours cover delays and bugs. The extras start only after checkpoint 2, so the core is always finished first.
 
-| Role | Development & reviews | Docs & presentation | Total (of 72 h) |
+| Member | Development | Docs & presentation | Total (of 72 h) |
 |---|---|---|---|
-| R1 Team Leader & DevOps (Ibrahim) | ≈ 46 h | ≈ 12 h | ≈ 58 h |
-| R2 Backend: Matching (Khaled) | ≈ 50 h | ≈ 8 h | ≈ 58 h |
-| R3 Backend: Papers (Mohammed) | ≈ 50 h | ≈ 8 h | ≈ 58 h |
-| R4 Frontend: Donor (Hager) | ≈ 48 h | ≈ 10 h | ≈ 58 h |
-| R5 Frontend: Requester (Zeyad) | ≈ 48 h | ≈ 10 h | ≈ 58 h |
-| R6 UI/UX & QA (Marawan) | ≈ 24 h | ≈ 42 h | ≈ 66 h |
+| Ibrahim Hassan Anwar (team leader) | ≈ 47 h | ≈ 12 h | ≈ 59 h |
+| Zeyad Mohammed Mohammed | ≈ 47 h | ≈ 12 h | ≈ 59 h |
+| Hager Waleed Shaker | ≈ 47 h | ≈ 12 h | ≈ 59 h |
+| Mohammed Eslam Mohammed | ≈ 47 h | ≈ 12 h | ≈ 59 h |
+| Marawan Hesham Tolba | ≈ 47 h | ≈ 12 h | ≈ 59 h |
+| Khaled Atef Salah | ≈ 47 h | ≈ 12 h | ≈ 59 h |
 
 **Tools and services (cost: $0).**
 
@@ -186,36 +186,30 @@ At launch, the only real cost would be a paid AI model for real papers (roughly 
 
 ### Roles
 
-The team has six roles, and each member takes one.
+All six members have the same amount of work. **Ibrahim Hassan Anwar is the team leader.** Besides his own area, he set up the project and the repository, and he has the final say on scope.
 
-| # | Role | Member | Main responsibilities | Best fit for someone who… |
-|---|---|---|---|---|
-| R1 | **Team Leader & DevOps** | Ibrahim Hassan Anwar | Architecture, repo setup, CI, Docker, deployment, authentication and roles, data models, demo data, reviewing pull requests, final say on scope | is the strongest all-round developer and is comfortable with Git and Docker |
-| R2 | **Backend: Matching & Alerts** | Khaled Atef Salah | Matching engine and its unit tests, notification waves, push notifications, live updates (Socket.io) | likes logic, algorithms and Node.js |
-| R3 | **Backend: Papers & Trust** | Mohammed Eslam Mohammed | AI paper check (`checkPaper()`) and its prompt, trust badges, request states, QR check-in API, admin API (paper review, reports, bans) | likes APIs, databases and working with AI |
-| R4 | **Frontend: Donor** | Hager Waleed Shaker | Donor signup and certificate upload, notifications on the phone, accept or decline, QR screen, donation history | likes React and building screens for phones |
-| R5 | **Frontend: Requester & Hospital** | Zeyad Mohammed Mohammed | Request form and paper upload, live progress page, partner-hospital portal (confirm papers, scan QR), admin dashboard | likes React, forms and dashboards |
-| R6 | **UI/UX & QA** | Marawan Hesham Tolba | Wireframes, UI kit and Arabic RTL guidelines, test plan and bug reports, slides and infographic, lead presenter | has an eye for design, writes clearly and presents well |
+We build the whole **frontend first**, with sample data, and each member owns **one area of the website** from start to finish. Each area has about the same amount of work: one big, one medium and one small page, or the equivalent.
 
-### Document owners
+| Member | Role | Area | Pages |
+|---|---|---|---|
+| Ibrahim Hassan Anwar | **Team leader** · Visitors | Public pages | Home, Signup, Login, plus the project setup |
+| Zeyad Mohammed Mohammed | Donor | Donor pages | Nearby requests, Upload certificate, Donation history |
+| Hager Waleed Shaker | Donation | The donation itself | Request details (accept, QR or no QR), Confirm donation, Terms of use + 404 |
+| Mohammed Eslam Mohammed | Requester | Requester pages | New request (4 steps + hospital paper), Request progress |
+| Marawan Hesham Tolba | Hospital | Partner hospital pages | Hospital dashboard (QR scan), Confirm papers, Hospital signup |
+| Khaled Atef Salah | Admin | Admin pages | Admin dashboard, Review papers, Reports and bans, Approve hospitals |
 
-Each phase has one owner who collects the work and submits it. Everyone contributes.
+Each member also builds the shared parts their pages need, and documents and tests their own area. The backend will be split between the members once the frontend is finished.
 
-| Phase | Owner | Contributors |
-|---|---|---|
-| 1. Planning & management | R1 | All |
-| 2. Literature review (feedback, improvements) | R6 | R4 |
-| 3. Requirements gathering | R6 | R4, R5 |
-| 4. Analysis & design | R2 | R1: architecture, deployment, components<br>R3: ERD, schema, class and state diagrams<br>R4: DFD, activity diagram<br>R5: sequence diagrams<br>R6: wireframes, UI guidelines |
-| 5. Implementation (code, README) | R1 | All |
-| 6. Testing & QA | R6 | R2, R3: automated tests<br>R4, R5: UI tests |
-| 7. Final presentation & reports | R6 | R1: technical docs<br>R4: demo video<br>R5: user manual |
+### Documents
+
+The team leader collects each phase document and submits it. Everyone contributes, and each member writes the parts about their own area.
 
 ### How we work
 
-- **Board:** GitHub Projects, with the columns To do, In progress, Review and Done.
+- **Board:** GitHub Projects, with the columns To do, In progress and Done.
 - **Meetings:** a 1-hour planning meeting at the start of each sprint, and a short written update every two days.
-- **Code:** one branch per feature, a pull request reviewed by one teammate, and CI must pass before merging.
+- **Code:** one branch per task. Each member checks their work (`npm run lint` and `npm run build`), opens a pull request and squash-merges it into `main`.
 - **Decisions:** after sprint 2, only the team leader can add new features to the plan.
 
 ---
@@ -224,7 +218,7 @@ Each phase has one owner who collects the work and submits it. Everyone contribu
 
 | # | Risk | Likelihood | Impact | Mitigation |
 |---|---|---|---|---|
-| 1 | A team member is unavailable for a week or more | Medium | High | Hours planned for the worst case. Two members on each side (backend and frontend) can cover for each other. The API is documented. |
+| 1 | A team member is unavailable for a week or more | Medium | High | Hours planned for the worst case. Each area is documented and uses the same shared components, so another member can cover it. |
 | 2 | The work runs out of time | Medium | High | A fixed core scope, checkpoints on 6 and 13 Nov, a feature freeze on 20 Nov and a 3-day buffer. |
 | 3 | Six people working on the same code cause conflicts or duplicated work | Medium | Medium | Each member owns clear folders and features, pull requests stay small, and there's a short written update every two days. |
 | 4 | Documentation takes time away from coding | High | Medium | Each phase has one owner, diagrams are written as code in the repo, and documents are written while the feature is being built. |
