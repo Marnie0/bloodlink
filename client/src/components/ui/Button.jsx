@@ -1,3 +1,3 @@
-export default function Button({ type = 'button', ...props }) {
-  return <button type={type} {...props} />;
+export default function Button() {
+  return <button>Click me</button>;
 }
