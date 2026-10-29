@@ -83,7 +83,7 @@ bloodlink/
 ├── client/                       # React + Vite + Tailwind frontend (JavaScript)
 │   └── src/
 │       ├── components/           # shared layout and UI components
-│       ├── features/             # pages, one folder per area
+│       ├── pages/                # pages, one folder per area
 │       └── App.jsx               # all routes
 └── docs/
     ├── 01-project-planning.md    # proposal, plan, roles, risks, KPIs

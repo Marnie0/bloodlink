@@ -1,24 +1,24 @@
 import { Route, Routes } from 'react-router-dom';
 import Layout from '@/components/layout/Layout';
-import HomePage from '@/features/home/HomePage';
-import SignupPage from '@/features/auth/SignupPage';
-import LoginPage from '@/features/auth/LoginPage';
-import TermsPage from '@/features/static/TermsPage';
-import NotFoundPage from '@/features/static/NotFoundPage';
-import DonorRequestsPage from '@/features/donor/DonorRequestsPage';
-import RequestDetailsPage from '@/features/donor/RequestDetailsPage';
-import CertificatePage from '@/features/donor/CertificatePage';
-import DonationHistoryPage from '@/features/donor/DonationHistoryPage';
-import NewRequestPage from '@/features/requester/NewRequestPage';
-import RequestProgressPage from '@/features/requester/RequestProgressPage';
-import ConfirmDonationPage from '@/features/requester/ConfirmDonationPage';
-import HospitalDashboardPage from '@/features/hospital/HospitalDashboardPage';
-import HospitalPapersPage from '@/features/hospital/HospitalPapersPage';
-import HospitalJoinPage from '@/features/hospital/HospitalJoinPage';
-import AdminDashboardPage from '@/features/admin/AdminDashboardPage';
-import AdminPapersPage from '@/features/admin/AdminPapersPage';
-import AdminReportsPage from '@/features/admin/AdminReportsPage';
-import AdminHospitalsPage from '@/features/admin/AdminHospitalsPage';
+import HomePage from '@/pages/home/HomePage';
+import SignupPage from '@/pages/auth/SignupPage';
+import LoginPage from '@/pages/auth/LoginPage';
+import TermsPage from '@/pages/static/TermsPage';
+import NotFoundPage from '@/pages/static/NotFoundPage';
+import DonorRequestsPage from '@/pages/donor/DonorRequestsPage';
+import RequestDetailsPage from '@/pages/donor/RequestDetailsPage';
+import CertificatePage from '@/pages/donor/CertificatePage';
+import DonationHistoryPage from '@/pages/donor/DonationHistoryPage';
+import NewRequestPage from '@/pages/requester/NewRequestPage';
+import RequestProgressPage from '@/pages/requester/RequestProgressPage';
+import ConfirmDonationPage from '@/pages/requester/ConfirmDonationPage';
+import HospitalDashboardPage from '@/pages/hospital/HospitalDashboardPage';
+import HospitalPapersPage from '@/pages/hospital/HospitalPapersPage';
+import HospitalJoinPage from '@/pages/hospital/HospitalJoinPage';
+import AdminDashboardPage from '@/pages/admin/AdminDashboardPage';
+import AdminPapersPage from '@/pages/admin/AdminPapersPage';
+import AdminReportsPage from '@/pages/admin/AdminReportsPage';
+import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
 
 export default function App() {
   return (
