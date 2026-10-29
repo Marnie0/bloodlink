@@ -4,7 +4,7 @@
 Hospital papers are checked, donor and patient meet only at the hospital, and no money is ever involved.
 
 > **DEPI 2026 capstone** · Track: Software Development - React Frontend Web Developer\
-> **Status:** Phases 1 to 3 submitted. Database and UI/UX design done. Frontend setup is on `main`; pages are being built.
+> **Status:** Planning, stakeholder analysis, database design and UI/UX design done. Frontend setup is on `main`; pages are being built.
 
 ---
 
@@ -36,19 +36,16 @@ BloodLink is a community website that sends a request only to donors who match t
 | Partner hospital | Confirms papers, scans donor QR codes, records donations |
 | Admin | Reviews unclear papers, handles reports, bans abusers |
 
-## Project status
+## Documentation
 
-📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: planning, literature review, requirements (with stakeholder analysis), database design and UI/UX design in one file.
+📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: all four documents in one file.
 
-| # | Phase | Deadline | Status |
-|---|---|---|---|
-| 1 | [Project Planning & Management](docs/01-project-planning.md) | 16 Oct 2026 | ✅ Done |
-| 2 | [Literature Review](docs/02-literature-review.md) | 16 Oct 2026 | ✅ Done |
-| 3 | [Requirements Gathering](docs/03-requirements.md) | 16 Oct 2026 | ✅ Done |
-| 4 | System Analysis & Design: [Database Design](docs/04-database-design.md) · [UI/UX Design](docs/04-ui-ux-design.md) | 6 Nov 2026 | 🟡 Database and UI/UX done (submitted 31 Oct) |
-| 5 | Implementation | 30 Nov 2026 | 🟡 Frontend setup done |
-| 6 | Testing & Quality Assurance | 4 Dec 2026 | ⬜ Not started |
-| 7 | Final Presentation & Reports | 4 Dec 2026 | ⬜ Not started |
+| # | Document | Status |
+|---|---|---|
+| 1 | [Project Planning](docs/01-project-planning.md) | ✅ Done |
+| 2 | [Stakeholder Analysis](docs/02-stakeholder-analysis.md) | ✅ Done |
+| 3 | [Database Design](docs/03-database-design.md) | ✅ Done |
+| 4 | [UI/UX Design](docs/04-ui-ux-design.md) | ✅ Done |
 
 ## Planned tech stack
 
@@ -87,9 +84,8 @@ bloodlink/
 │       └── App.jsx               # all routes
 └── docs/
     ├── 01-project-planning.md    # proposal, plan, roles, risks, KPIs
-    ├── 02-literature-review.md   # similar solutions, comparison, sources
-    ├── 03-requirements.md        # stakeholders, user stories, use cases, requirements
-    ├── 04-database-design.md     # collections, ERD, indexes, privacy rules
+    ├── 02-stakeholder-analysis.md  # stakeholders, their needs and influence
+    ├── 03-database-design.md     # collections, ERD, indexes, privacy rules
     ├── 04-ui-ux-design.md        # flows, screens, design system, accessibility
     └── img/ui/                   # screenshots used in the UI/UX document
 ```
