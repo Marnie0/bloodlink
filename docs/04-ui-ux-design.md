@@ -1,4 +1,4 @@
-# Phase 4: UI/UX Design
+# UI/UX Design
 
 **Project:** BloodLink | رابط الحياة\
 **Program:** DEPI (Digital Egypt Pioneers Initiative), 2026\
@@ -104,26 +104,26 @@ flowchart TD
     R --> A["Admin<br/>Dashboard · Unclear papers<br/>Reports · Hospitals"]
 ```
 
-| Area | Screen | Route | Requirements |
-|---|---|---|---|
-| Public | Home | `/` | FR-10, FR-14, FR-25 |
-| Public | Signup | `/signup` | US-01, FR-01–03 |
-| Public | Login | `/login` | FR-01 |
-| Public | Terms of use + 404 | `/terms`, `*` | FR-03 |
-| Donor | Nearby requests + availability switch | `/donor/requests` | US-03, US-06 |
-| Donor | Request details → accept → QR or no QR | `/donor/requests/:id` | US-04, US-05 |
-| Donor | Blood-type certificate | `/donor/certificate` | US-02 |
-| Donor | Donation history | `/donor/history` | US-07 |
-| Requester | New request (4 steps + paper check) | `/requests/new/:step` | US-08, US-09 |
-| Requester | Request progress (live) | `/requests/:id` | US-10, US-11 |
-| Requester | Confirm donation, expired request, WhatsApp share | `/requests/:id/confirm` | US-12, US-14 |
-| Hospital | Dashboard: scan QR, record outcome | `/hospital` | US-16 |
-| Hospital | Papers waiting for confirmation | `/hospital/papers` | US-15 |
-| Hospital | Partner signup + waiting for approval | `/hospital/join` | US-19 |
-| Admin | Dashboard (key numbers) | `/admin` | US-20 |
-| Admin | Unclear papers | `/admin/papers` | US-17 |
-| Admin | Reports and bans | `/admin/reports` | US-18 |
-| Admin | Approve partner hospitals | `/admin/hospitals` | US-19 |
+| Area | Screen | Route |
+|---|---|---|
+| Public | Home | `/` |
+| Public | Signup | `/signup` |
+| Public | Login | `/login` |
+| Public | Terms of use + 404 | `/terms`, `*` |
+| Donor | Nearby requests + availability switch | `/donor/requests` |
+| Donor | Request details → accept → QR or no QR | `/donor/requests/:id` |
+| Donor | Blood-type certificate | `/donor/certificate` |
+| Donor | Donation history | `/donor/history` |
+| Requester | New request (4 steps + paper check) | `/requests/new/:step` |
+| Requester | Request progress (live) | `/requests/:id` |
+| Requester | Confirm donation, expired request, WhatsApp share | `/requests/:id/confirm` |
+| Hospital | Dashboard: scan QR, record outcome | `/hospital` |
+| Hospital | Papers waiting for confirmation | `/hospital/papers` |
+| Hospital | Partner signup + waiting for approval | `/hospital/join` |
+| Admin | Dashboard (key numbers) | `/admin` |
+| Admin | Unclear papers | `/admin/papers` |
+| Admin | Reports and bans | `/admin/reports` |
+| Admin | Approve partner hospitals | `/admin/hospitals` |
 
 **Navigation.** On a computer: a utility bar (text size, contrast, dark mode, language), the header with the seal and search, and a main menu with a red **Request blood** button. On a phone: the same header, and a bottom tab bar with 5 tabs (Home, Requests, Request blood, My appointment, Hospital). Inside each area, a side menu lists that area's pages.
 
@@ -252,7 +252,7 @@ Every screen is designed in **all its states**, not only the happy one. Each scr
 
 ## 8. Accessibility
 
-Target: **WCAG 2.1 AA** and a Lighthouse accessibility score of at least 90 (NFR-11).
+Target: **WCAG 2.1 AA** and a Lighthouse accessibility score of at least 90.
 
 | Feature | How |
 |---|---|
@@ -304,7 +304,7 @@ We will test the website with **5 people per round** (family and friends who mat
 
 | # | Task | Success when | Target |
 |---|---|---|---|
-| 1 | As a requester, send a request for 3 units of O+ at Al Nour Hospital | Request sent with a paper | Under 3 minutes (NFR-10) |
+| 1 | As a requester, send a request for 3 units of O+ at Al Nour Hospital | Request sent with a paper | Under 3 minutes |
 | 2 | Find out how many donors have accepted your request | Finds "2 of 3" on the progress page | Under 30 seconds |
 | 3 | As a donor, upload your certificate | Sees the badge result | Under 2 minutes |
 | 4 | Accept a nearby request and find where to go in the hospital | Opens the QR ticket and the directions | Without help |

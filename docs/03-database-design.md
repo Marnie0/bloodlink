@@ -1,4 +1,4 @@
-# Phase 4: Database Design
+# Database Design
 
 **Project:** BloodLink | رابط الحياة\
 **Program:** DEPI (Digital Egypt Pioneers Initiative), 2026\
@@ -28,7 +28,7 @@
 | **Database** | MongoDB Atlas (free M0 cluster) | Flexible documents fit papers, AI results and request history. Built-in geo queries for "donors near this hospital". Free for the demo. |
 | **Access** | Mongoose models in the TypeScript backend (Node + Express) | Schemas, validation and references in one place. Taught in the course. |
 | **Files** | Cloudinary (private, signed URLs) | Paper images and PDFs are never stored in the database, only their private file reference. |
-| **Live updates** | Socket.io on top of the database | When a pledge is saved, the requester's page updates without a refresh (FR-18). |
+| **Live updates** | Socket.io on top of the database | When a pledge is saved, the requester's page updates without a refresh. |
 
 **Design rules**
 
@@ -40,21 +40,21 @@
 
 **Collections at a glance**
 
-| Collection | Holds | Main requirements |
-|---|---|---|
-| `users` | Every account: name, phone, password hash, roles | FR-01–04 |
-| `donorProfiles` | Donor-only data: blood type, location, availability, trust | US-01, US-06, FR-12, FR-21 |
-| `hospitals` | All hospitals, partner or not | FR-04, FR-07 |
-| `papers` | Uploaded certificates and hospital papers, with the check result | FR-05–11 |
-| `bloodRequests` | Requests for blood | FR-06, FR-12–15, FR-18 |
-| `pledges` | A donor's answer to a request (accept / decline), with the QR token | FR-16, FR-17, FR-19 |
-| `donations` | What actually happened at the hospital | FR-19–21, US-07 |
-| `notifications` | Who was notified about which request, in which wave | FR-13, FR-14 |
-| `pushSubscriptions` | Browser push endpoints | FR-14 |
-| `reports` | Reports about users or requests | FR-22, FR-23 |
-| `auditLogs` | Every admin and hospital-staff action | FR-23, NFR-07 |
-| `settings` | One document: wave radius, pause period, AI mode | FR-13, FR-21, NFR-13 |
-| `counters` | Next number for each reference type | Reference numbers |
+| Collection | Holds |
+|---|---|
+| `users` | Every account: name, phone, password hash, roles |
+| `donorProfiles` | Donor-only data: blood type, location, availability, trust |
+| `hospitals` | All hospitals, partner or not |
+| `papers` | Uploaded certificates and hospital papers, with the check result |
+| `bloodRequests` | Requests for blood |
+| `pledges` | A donor's answer to a request (accept / decline), with the QR token |
+| `donations` | What actually happened at the hospital |
+| `notifications` | Who was notified about which request, in which wave |
+| `pushSubscriptions` | Browser push endpoints |
+| `reports` | Reports about users or requests |
+| `auditLogs` | Every admin and hospital-staff action |
+| `settings` | One document: wave radius, pause period, AI mode |
+| `counters` | Next number for each reference type |
 
 ## 2. Entity relationship diagram
 
@@ -80,9 +80,9 @@ The fields of each collection are listed in [section 3](#3-collections). The dia
 
 **Reading the main relationships**
 
-- A **user** can be a donor, a requester, or both (FR-02). Only donors have a **donor profile** (one each).
+- A **user** can be a donor, a requester, or both. Only donors have a **donor profile** (one each).
 - Hospital **staff** are users with the `hospital_staff` role and a `hospitalId`.
-- A **request** belongs to one requester and one hospital, and is backed by exactly one **paper** (FR-06).
+- A **request** belongs to one requester and one hospital, and is backed by exactly one **paper**.
 - A **pledge** links one donor to one request. A request has many pledges, one per donor who answered.
 - A pledge ends in at most one **donation** record: donated, not today, didn't show up, or self-confirmed.
 
@@ -97,13 +97,13 @@ Every collection also has `createdAt` and `updatedAt` (added automatically by Mo
 | `_id` | ObjectId | | |
 | `name` | string | required, 3–80 chars | Full name in Arabic |
 | `phone` | string | required, unique, Egyptian mobile `01XXXXXXXXX` | **Private** (section 8) |
-| `email` | string | optional, unique when present, lowercase | Login with email or phone (FR-01) |
-| `passwordHash` | string | required | bcrypt, never returned by the API (NFR-04) |
-| `roles` | string[] | at least 1 of `donor`, `requester`, `hospital_staff`, `admin` | Donor + requester together is allowed (FR-02) |
+| `email` | string | optional, unique when present, lowercase | Login with email or phone |
+| `passwordHash` | string | required | bcrypt, never returned by the API |
+| `roles` | string[] | at least 1 of `donor`, `requester`, `hospital_staff`, `admin` | Donor + requester together is allowed |
 | `hospitalId` | ObjectId → `hospitals` | required if `hospital_staff` | |
-| `termsAcceptedAt` | date | required | FR-03 |
-| `aiConsentAt` | date | optional | Consent before a paper goes to the AI check (NFR-07) |
-| `status` | string | `active`, `warned`, `banned` | Banned users can't log in (US-18) |
+| `termsAcceptedAt` | date | required | When the user accepted the terms of use |
+| `aiConsentAt` | date | optional | Consent before a paper goes to the AI check |
+| `status` | string | `active`, `warned`, `banned` | Banned users can't log in |
 | `ban` | object | `{ reason, by, at }` | Set by an admin |
 | `lastLoginAt` | date | | |
 
@@ -116,8 +116,8 @@ Every collection also has `createdAt` and `updatedAt` (added automatically by Mo
 | `bloodType` | string | one of the 8 blood types | From the certificate |
 | `governorate`, `area` | string | required | For display and filters |
 | `location` | GeoJSON Point | required, `[longitude, latitude]` | Used for distance matching |
-| `isAvailable` | boolean | default `true` | The availability switch (US-06) |
-| `pausedUntil` | date | optional | Set after a donation (FR-21) or by the donor |
+| `isAvailable` | boolean | default `true` | The availability switch |
+| `pausedUntil` | date | optional | Set after a donation or by the donor |
 | `trustLevel` | string | `pending`, `needs_review`, `looks_valid`, `verified` | Copied from the certificate's result |
 | `certificatePaperId` | ObjectId → `papers` | | The current certificate |
 | `stats` | object | `{ donations, noShows, lastDonationAt }` | Kept up to date when a donation is recorded |
@@ -132,7 +132,7 @@ Every collection also has `createdAt` and `updatedAt` (added automatically by Mo
 | `governorate`, `area`, `address` | string | required | |
 | `location` | GeoJSON Point | required | Matching measures distance from here |
 | `isPartner` | boolean | default `false` | Only partners can confirm papers and scan QR codes |
-| `partnerStatus` | string | `none`, `pending`, `approved`, `rejected` | Partner accounts wait for admin approval (FR-04) |
+| `partnerStatus` | string | `none`, `pending`, `approved`, `rejected` | Partner accounts wait for admin approval |
 | `partnerRequest` | object | `{ contactName, contactPhone, documentPaperId, submittedAt }` | From the hospital signup form |
 | `approvedBy`, `approvedAt` | ObjectId → `users`, date | | |
 | `bloodBank` | object | `{ building, floor, hours, phone }` | Directions shown to donors after accepting |
@@ -149,12 +149,12 @@ One document per uploaded file: a donor's blood-type certificate or a requester'
 | `kind` | string | `donor_certificate`, `need_paper`, `hospital_license` | |
 | `hospitalId` | ObjectId → `hospitals` | required | The hospital that issued it |
 | `fromPartner` | boolean | | Copied from the hospital at upload time |
-| `file` | object | `{ publicId, mime, sizeBytes }`; JPG, PNG or PDF, ≤ 5 MB | Cloudinary private file. **Never public** (FR-11) |
-| `ai` | object | `{ provider, result, extracted, problems, checkedAt }` | Only for non-partner papers (FR-08, FR-09) |
+| `file` | object | `{ publicId, mime, sizeBytes }`; JPG, PNG or PDF, ≤ 5 MB | Cloudinary private file. **Never public** |
+| `ai` | object | `{ provider, result, extracted, problems, checkedAt }` | Only for non-partner papers |
 | `ai.extracted` | object | `{ name, bloodType, stampVisible, issueDate }` | What the AI could read |
 | `status` | string | see [5.2](#52-paper-and-trust-level) | |
 | `review` | object | `{ by, at, decision, note }` | Partner staff or admin decision |
-| `expiresAt` | date | | Need papers are only valid for a short time (FR-09 "date is recent") |
+| `expiresAt` | date | | Need papers are only valid for a short time |
 
 ### 3.5 `bloodRequests`
 
@@ -166,15 +166,15 @@ One document per uploaded file: a donor's blood-type certificate or a requester'
 | `bloodType` | string | one of the 8 blood types | The patient's type |
 | `component` | string | `whole_blood`, `platelets`, `plasma` | |
 | `unitsNeeded` | number | 1–10 | |
-| `unitsPledged` | number | ≥ 0 | Accepted pledges still open. Kept in sync for the live counter (FR-18) |
+| `unitsPledged` | number | ≥ 0 | Accepted pledges still open. Kept in sync for the live counter |
 | `unitsDonated` | number | ≥ 0 | |
 | `urgency` | string | `urgent`, `normal` | |
-| `neededBy` | date | required, in the future | The request expires after this (FR-15) |
+| `neededBy` | date | required, in the future | The request expires after this |
 | `hospitalId` | ObjectId → `hospitals` | required | |
-| `paperId` | ObjectId → `papers` | required | Can't be published without it (FR-06) |
+| `paperId` | ObjectId → `papers` | required | Can't be published without it |
 | `trustLevel` | string | copied from the paper | The badge donors see |
 | `status` | string | see [5.1](#51-blood-request) | |
-| `wave` | object | `{ number, radiusKm, startedAt, nextAt }` | 1 = 5 km, 2 = 15 km (FR-13) |
+| `wave` | object | `{ number, radiusKm, startedAt, nextAt }` | 1 = 5 km, 2 = 15 km |
 | `history` | array of `{ at, event, by }` | embedded, append-only | The timeline on the progress page |
 
 ### 3.6 `pledges`
@@ -189,9 +189,9 @@ Created when a donor answers a request.
 | `status` | string | `accepted`, `declined`, `cancelled`, `closed` | |
 | `wave` | number | | Which wave reached this donor |
 | `distanceKm` | number | | Donor to hospital, at the time of matching |
-| `qrToken` | string | unique, random, only for partner hospitals | Encoded in the QR code (FR-19) |
+| `qrToken` | string | unique, random, only for partner hospitals | Encoded in the QR code |
 | `qrExpiresAt` | date | | Valid until the request's deadline |
-| `acceptedAt`, `answeredAt` | date | | `acceptedAt` unlocks phone numbers (FR-17) |
+| `acceptedAt`, `answeredAt` | date | | `acceptedAt` unlocks phone numbers |
 
 ### 3.7 `donations`
 
@@ -202,7 +202,7 @@ Created when a donor answers a request.
 | `outcome` | string | `donated`, `deferred`, `no_show`, `self_confirmed` | `deferred` = "not able to donate today (medical decision)" |
 | `method` | string | `qr_scan`, `self_confirmation` | |
 | `recordedBy` | ObjectId → `users` | for `qr_scan` | The hospital staff member |
-| `confirmations` | object | `{ donorAt, requesterAt }` | For `self_confirmation`: both must confirm (FR-20) |
+| `confirmations` | object | `{ donorAt, requesterAt }` | For `self_confirmation`: both must confirm |
 | `staffNote` | string | optional, ≤ 200 chars | Internal, admin only. **No medical details.** |
 | `at` | date | required | |
 
@@ -231,15 +231,15 @@ Created when a donor answers a request.
 |---|---|---|---|
 | `ref` | string | unique, `RP-2026-000412` | |
 | `reporterId` | ObjectId → `users` | required | |
-| `target` | object | `{ kind: 'user' \| 'request', id }` | Report button on every profile and request (FR-22) |
+| `target` | object | `{ kind: 'user' \| 'request', id }` | Report button on every profile and request |
 | `reason` | string | `money_request`, `fake_paper`, `harassment`, `no_show`, `other` | Asking for money = highest priority |
 | `details` | string | ≤ 500 chars | |
-| `status` | string | `open`, `dismissed`, `warned`, `banned` | US-18 |
+| `status` | string | `open`, `dismissed`, `warned`, `banned` | What the admin decided |
 | `handledBy`, `handledAt` | ObjectId, date | | |
 
 ### 3.11 `auditLogs`
 
-Every admin and hospital-staff action is logged with the actor's name (NFR-07): paper decisions, bans, hospital approvals, QR scans.
+Every admin and hospital-staff action is logged with the actor's name: paper decisions, bans, hospital approvals, QR scans.
 
 | Field | Type | Notes |
 |---|---|---|
@@ -255,10 +255,10 @@ Every admin and hospital-staff action is logged with the actor's name (NFR-07): 
 
 | Field | Default | Used for |
 |---|---|---|
-| `waveRadiiKm` | `[5, 15]` | FR-13 |
+| `waveRadiiKm` | `[5, 15]` | Wave 1 and wave 2 search radius |
 | `waveDelayMinutes` | `120` | Time before the next wave starts |
-| `pauseDaysAfterDonation` | `90` | FR-21 (general guidance; the hospital decides) |
-| `aiProvider` | `mock` | `mock` or a real provider (NFR-13) |
+| `pauseDaysAfterDonation` | `90` | General guidance; the hospital decides |
+| `aiProvider` | `mock` | `mock` or a real provider |
 | `needPaperMaxAgeDays` | `7` | How recent a hospital paper must be |
 
 `counters` makes reference numbers: `{ _id: 'BL-2026', seq: 4213 }`. The backend increments it atomically with `findOneAndUpdate({ $inc: { seq: 1 } })`.
@@ -277,7 +277,7 @@ These lists are shared by the database, the API and the frontend constants, so a
 | Donation outcome | `donated`, `deferred`, `no_show`, `self_confirmed` |
 | Report status | `open`, `dismissed`, `warned`, `banned` |
 
-**Blood compatibility** (used by matching, FR-12). Which donors can give to a patient:
+**Blood compatibility** (used by matching). Which donors can give to a patient:
 
 | Patient | Compatible donors |
 |---|---|
@@ -329,7 +329,7 @@ Only `active` requests are matched and shown to donors.
 | `needs_review` | The AI couldn't read it, or the AI service is down | `needs_review` |
 | `rejected` | Hospital or admin rejected it | (request can't be published) |
 
-A self-confirmed donation at a non-partner hospital **never** upgrades a donor to `verified` (FR-20). Only a QR scan at a partner hospital can.
+A self-confirmed donation at a non-partner hospital **never** upgrades a donor to `verified`. Only a QR scan at a partner hospital can.
 
 ### 5.3 Pledge and donation
 
@@ -352,12 +352,12 @@ flowchart TD
 |---|---|---|
 | `users` | `{ phone: 1 }` unique | Login and duplicate check |
 | `users` | `{ email: 1 }` unique, sparse | Email is optional |
-| `donorProfiles` | `{ location: '2dsphere' }` | Find donors within 5 / 15 km (FR-13) |
-| `donorProfiles` | `{ bloodType: 1, isAvailable: 1, pausedUntil: 1 }` | Filter matching donors fast (NFR-03) |
+| `donorProfiles` | `{ location: '2dsphere' }` | Find donors within 5 / 15 km |
+| `donorProfiles` | `{ bloodType: 1, isAvailable: 1, pausedUntil: 1 }` | Filter matching donors fast |
 | `donorProfiles` | `{ userId: 1 }` unique, `{ ref: 1 }` unique | |
 | `hospitals` | `{ location: '2dsphere' }`, `{ ref: 1 }` unique, `{ isPartner: 1 }` | Nearby requests, partner list |
 | `bloodRequests` | `{ ref: 1 }` unique | Status lookup by reference |
-| `bloodRequests` | `{ status: 1, neededBy: 1 }` | Active list and the expiry job (FR-15) |
+| `bloodRequests` | `{ status: 1, neededBy: 1 }` | Active list and the expiry job |
 | `bloodRequests` | `{ createdBy: 1, createdAt: -1 }` | "My requests" |
 | `bloodRequests` | `{ hospitalId: 1, status: 1 }` | Hospital dashboard |
 | `papers` | `{ status: 1, kind: 1, createdAt: 1 }` | Admin and hospital queues, oldest first |
@@ -365,7 +365,7 @@ flowchart TD
 | `pledges` | `{ requestId: 1, donorId: 1 }` unique | One answer per donor per request |
 | `pledges` | `{ donorId: 1, status: 1 }` | Donor's appointments |
 | `pledges` | `{ qrToken: 1 }` unique, sparse | QR scan lookup |
-| `donations` | `{ donorId: 1, at: -1 }` | Donation history (US-07) |
+| `donations` | `{ donorId: 1, at: -1 }` | Donation history |
 | `donations` | `{ hospitalId: 1, at: -1 }` | Hospital's log |
 | `notifications` | `{ requestId: 1, userId: 1 }` unique | Never notify twice |
 | `reports` | `{ status: 1, reason: 1, createdAt: 1 }` | Admin queue, money requests first |
@@ -373,7 +373,7 @@ flowchart TD
 
 ## 7. Key queries
 
-**Matching: donors for a request (FR-12, FR-13).** One geo query, run per wave:
+**Matching: donors for a request.** One geo query, run per wave:
 
 ```js
 db.donorProfiles.aggregate([
@@ -395,15 +395,15 @@ db.donorProfiles.aggregate([
 
 Closest and most trusted donors come first. Banned users and donors already in `notifications` for this request are filtered out.
 
-**Live counter (FR-18).** When a pledge is accepted or cancelled, `unitsPledged` is changed with `$inc` in the same operation, and Socket.io sends the new number to the request's room.
+**Live counter.** When a pledge is accepted or cancelled, `unitsPledged` is changed with `$inc` in the same operation, and Socket.io sends the new number to the request's room.
 
-**Expiry job (FR-15).** Every 10 minutes: `updateMany({ status: 'active', neededBy: { $lt: now } }, { $set: { status: 'expired' } })`.
+**Expiry job.** Every 10 minutes: `updateMany({ status: 'active', neededBy: { $lt: now } }, { $set: { status: 'expired' } })`.
 
-**Admin key numbers (FR-24).** Counts on `bloodRequests` (active), `donorProfiles`, `reports` (open), and the average time from a request's `createdAt` to its first pledge's `acceptedAt`.
+**Admin key numbers.** Counts on `bloodRequests` (active), `donorProfiles`, `reports` (open), and the average time from a request's `createdAt` to its first pledge's `acceptedAt`.
 
 ## 8. Privacy and security rules
 
-The database stores personal data, so the API decides exactly who can see what (FR-11, FR-17, NFR-07, Egypt's Personal Data Protection Law 151/2020).
+The database stores personal data, so the API decides exactly who can see what (Egypt's Personal Data Protection Law 151/2020).
 
 | Data | Who can see it |
 |---|---|
@@ -417,10 +417,10 @@ The database stores personal data, so the API decides exactly who can see what (
 
 **Other rules**
 
-- Passwords are hashed with bcrypt (NFR-04). Login uses a JWT in an httpOnly cookie.
-- Every input is validated with zod before it reaches Mongoose (NFR-05).
-- Connection strings and keys live only in `.env`, never in the repo (NFR-06).
-- Only sample papers are sent to the free AI tier (NFR-08).
+- Passwords are hashed with bcrypt. Login uses a JWT in an httpOnly cookie.
+- Every input is validated with zod before it reaches Mongoose.
+- Connection strings and keys live only in `.env`, never in the repo.
+- Only sample papers are sent to the free AI tier.
 - Database users: the app connects with a user that can only read and write the `bloodlink` database.
 
 ## 9. Validation and data rules
@@ -428,7 +428,7 @@ The database stores personal data, so the API decides exactly who can see what (
 | Rule | Where |
 |---|---|
 | Phone matches `^01[0125][0-9]{8}$` (Egyptian mobile) | zod + Mongoose |
-| Files: JPG, PNG or PDF, max 5 MB | Upload middleware (US-02) |
+| Files: JPG, PNG or PDF, max 5 MB | Upload middleware |
 | A request needs `paperId`, and `neededBy` in the future | zod + Mongoose |
 | `unitsPledged` ≤ `unitsNeeded` + 1 (one spare donor allowed) | Service layer, in the same update |
 | One pledge per donor per request | Unique index |
