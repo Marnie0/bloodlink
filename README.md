@@ -4,7 +4,7 @@
 Hospital papers are checked, donor and patient meet only at the hospital, and no money is ever involved.
 
 > **DEPI 2026 capstone** · Track: Software Development - React Frontend Web Developer\
-> **Status:** Planning, stakeholder analysis, database design and UI/UX design done. Frontend setup is on `main`; pages are being built.
+> **Status:** Phases 1 to 3 done. Frontend setup is on `main`; pages are being built.
 
 ---
 
@@ -38,14 +38,13 @@ BloodLink is a community website that sends a request only to donors who match t
 
 ## Documentation
 
-📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: all four documents in one file.
+📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: phases 1 to 3 in one file.
 
-| # | Document | Status |
-|---|---|---|
-| 1 | [Project Planning](docs/01-project-planning.md) | ✅ Done |
-| 2 | [Stakeholder Analysis](docs/02-stakeholder-analysis.md) | ✅ Done |
-| 3 | [Database Design](docs/03-database-design.md) | ✅ Done |
-| 4 | [UI/UX Design](docs/04-ui-ux-design.md) | ✅ Done |
+| # | Phase | Deadline | Status |
+|---|---|---|---|
+| 1 | [Project Planning & Management](docs/01-project-planning.md) | 16 Oct 2026 | ✅ Done |
+| 2 | [Literature Review](docs/02-literature-review.md) | 16 Oct 2026 | ✅ Done |
+| 3 | [Requirements Gathering](docs/03-requirements.md) (incl. stakeholder analysis) | 16 Oct 2026 | ✅ Done |
 
 ## Planned tech stack
 
@@ -84,10 +83,8 @@ bloodlink/
 │       └── App.jsx               # all routes
 └── docs/
     ├── 01-project-planning.md    # proposal, plan, roles, risks, KPIs
-    ├── 02-stakeholder-analysis.md  # stakeholders, their needs and influence
-    ├── 03-database-design.md     # collections, ERD, indexes, privacy rules
-    ├── 04-ui-ux-design.md        # flows, screens, design system, accessibility
-    └── img/ui/                   # screenshots used in the UI/UX document
+    ├── 02-literature-review.md   # similar solutions, comparison, sources
+    └── 03-requirements.md        # stakeholders, user stories, use cases, requirements
 ```
 
 The `server/` folder, setup steps and the demo link will be added in the implementation phase.
