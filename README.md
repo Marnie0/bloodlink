@@ -4,7 +4,7 @@
 Hospital papers are checked, donor and patient meet only at the hospital, and no money is ever involved.
 
 > **DEPI 2026 capstone** · Track: Software Development - React Frontend Web Developer\
-> **Status:** Phases 1 to 3 submitted. Next: System Analysis & Design
+> **Status:** Phases 1 to 3 submitted. Database and UI/UX design done. Frontend setup is on `main`; pages are being built.
 
 ---
 
@@ -38,15 +38,15 @@ BloodLink is a community website that sends a request only to donors who match t
 
 ## Project status
 
-📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: phases 1 to 3 in one file.
+📄 **[Project Documentation (PDF)](BloodLink_Project_Documentation.pdf)**: planning, literature review, requirements (with stakeholder analysis), database design and UI/UX design in one file.
 
 | # | Phase | Deadline | Status |
 |---|---|---|---|
 | 1 | [Project Planning & Management](docs/01-project-planning.md) | 16 Oct 2026 | ✅ Done |
 | 2 | [Literature Review](docs/02-literature-review.md) | 16 Oct 2026 | ✅ Done |
 | 3 | [Requirements Gathering](docs/03-requirements.md) | 16 Oct 2026 | ✅ Done |
-| 4 | System Analysis & Design | 6 Nov 2026 | 🟡 Next |
-| 5 | Implementation | 30 Nov 2026 | ⬜ Not started |
+| 4 | System Analysis & Design: [Database Design](docs/04-database-design.md) · [UI/UX Design](docs/04-ui-ux-design.md) | 6 Nov 2026 | 🟡 Database and UI/UX done (submitted 31 Oct) |
+| 5 | Implementation | 30 Nov 2026 | 🟡 Frontend setup done |
 | 6 | Testing & Quality Assurance | 4 Dec 2026 | ⬜ Not started |
 | 7 | Final Presentation & Reports | 4 Dec 2026 | ⬜ Not started |
 
@@ -54,7 +54,7 @@ BloodLink is a community website that sends a request only to donors who match t
 
 | Layer | Tools |
 |---|---|
-| Frontend | React (JavaScript), Tailwind CSS (Arabic RTL), Vite |
+| Frontend | React (JavaScript), React Compiler, React Router, Tailwind CSS v4 (Arabic RTL), Vite |
 | Backend | Node.js, Express, TypeScript, Socket.io, Web Push |
 | Database | MongoDB (Mongoose, geo queries) |
 | AI paper check | Vision AI API behind one `checkPaper()` function (mock / free / paid) |
@@ -63,27 +63,36 @@ BloodLink is a community website that sends a request only to donors who match t
 
 ## Team
 
-| Member | Role |
-|---|---|
-| Ibrahim Hassan Anwar | Team Leader & DevOps |
-| Khaled Atef Salah | Backend: Matching & Alerts |
-| Mohammed Eslam Mohammed | Backend: Papers & Trust |
-| Hager Waleed Shaker | Frontend: Donor |
-| Zeyad Mohammed Mohammed | Frontend: Requester & Hospital |
-| Marawan Hesham Tolba | UI/UX & QA |
+| Member | Role | Area |
+|---|---|---|
+| Ibrahim Hassan Anwar | **Team leader** · Visitors | Home, Signup, Login, project setup |
+| Zeyad Mohammed Mohammed | Donor | Nearby requests, Certificate, Donation history |
+| Hager Waleed Shaker | Donation | Request details, Confirm donation, Terms + 404 |
+| Mohammed Eslam Mohammed | Requester | New request, Request progress |
+| Marawan Hesham Tolba | Hospital | Hospital dashboard, Confirm papers, Hospital signup |
+| Khaled Atef Salah | Admin | Admin dashboard, Review papers, Reports, Approve hospitals |
 
-Full responsibilities are in the [planning document](docs/01-project-planning.md#3-task-assignment--roles).
+Details are in the [planning document](docs/01-project-planning.md#3-task-assignment--roles).
 
 ## Repository structure
 
 ```
 bloodlink/
 ├── README.md
-├── BloodLink_Project_Documentation.pdf   # phases 1 to 3 in one PDF
+├── BloodLink_Project_Documentation.pdf   # all documents in one PDF
+├── client/                       # React + Vite + Tailwind frontend (JavaScript)
+│   └── src/
+│       ├── api/                  # functions pages call for data
+│       ├── mocks/                # sample data until the backend is ready
+│       ├── components/           # shared layout and UI components
+│       └── features/             # pages, one folder per area
 └── docs/
-    ├── 01-project-planning.md   # proposal, plan, roles, risks, KPIs
-    ├── 02-literature-review.md  # similar solutions, comparison, sources
-    └── 03-requirements.md       # stakeholders, user stories, use cases, requirements
+    ├── 01-project-planning.md    # proposal, plan, roles, risks, KPIs
+    ├── 02-literature-review.md   # similar solutions, comparison, sources
+    ├── 03-requirements.md        # stakeholders, user stories, use cases, requirements
+    ├── 04-database-design.md     # collections, ERD, indexes, privacy rules
+    ├── 04-ui-ux-design.md        # flows, screens, design system, accessibility
+    └── img/ui/                   # screenshots used in the UI/UX document
 ```
 
-The `client/` and `server/` folders, setup steps and the demo link will be added in the implementation phase.
+The `server/` folder, setup steps and the demo link will be added in the implementation phase.
