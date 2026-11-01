@@ -12,7 +12,7 @@ const links = [
 export default function BottomTabBar() {
   return (
     <>
-      <div className="h-20 lg:hidden" />
+      <div className="h-21 lg:hidden" />
       <nav
         className="bg-surface/90 border-line fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] mx-auto max-w-lg rounded-2xl border shadow-lg backdrop-blur lg:hidden"
         aria-label="القائمة الرئيسية للشاشات الصغيرة"
