@@ -1,5 +1,6 @@
-import { Link } from 'react-router-dom';
 import Brand from './Brand';
+import MainNav from './MainNav';
+import { Link } from 'react-router-dom';
 import { Bell, LogIn, Search } from 'lucide-react';
 
 export default function Header() {
@@ -39,6 +40,7 @@ export default function Header() {
           </Link>
         </div>
       </div>
+      <MainNav />
     </header>
   );
 }
