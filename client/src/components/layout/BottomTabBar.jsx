@@ -28,7 +28,7 @@ export default function BottomTabBar() {
                 className={({ isActive }) =>
                   clsx(
                     'text-tiny flex flex-col items-center justify-center gap-1 py-2 font-medium transition-colors',
-                    isActive ? 'text-crimson' : 'text-ink-2 hover:text-crimson',
+                    isActive ? 'text-crimson' : 'text-ink-2',
                   )
                 }
               >
