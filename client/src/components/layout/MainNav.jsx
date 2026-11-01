@@ -22,8 +22,10 @@ export default function MainNav() {
               end={link.end}
               className={({ isActive }) =>
                 clsx(
-                  'focus-visible:outline-gold rounded-full px-3 py-2 text-sm font-medium transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
-                  isActive ? 'bg-surface text-navy font-semibold' : 'text-white hover:bg-white/10',
+                  'focus-visible:outline-gold rounded-full px-3 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
+                  isActive
+                    ? 'bg-surface text-navy font-semibold'
+                    : 'font-medium text-white hover:bg-white/10',
                 )
               }
             >

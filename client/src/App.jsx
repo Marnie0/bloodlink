@@ -1,6 +1,7 @@
 import { Route, Routes } from 'react-router-dom';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import BottomTabBar from '@/components/layout/BottomTabBar';
 import HomePage from '@/pages/home/HomePage';
 import SignupPage from '@/pages/auth/SignupPage';
 import LoginPage from '@/pages/auth/LoginPage';
@@ -62,6 +63,7 @@ export default function App() {
         </Routes>
       </main>
       <Footer />
+      <BottomTabBar />
     </>
   );
 }
