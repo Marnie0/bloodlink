@@ -12,7 +12,7 @@ const links = [
 export default function BottomTabBar() {
   return (
     <>
-      <div className="h-21 lg:hidden" />
+      <div className="h-19 lg:hidden" />
       <nav
         className="bg-surface/90 border-line fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] mx-auto max-w-lg rounded-2xl border shadow-lg backdrop-blur lg:hidden"
         aria-label="القائمة الرئيسية للشاشات الصغيرة"
@@ -25,21 +25,15 @@ export default function BottomTabBar() {
                 key={link.to}
                 to={link.to}
                 end={link.end}
-                className="text-tiny flex flex-col items-center gap-1 py-2"
+                className={({ isActive }) =>
+                  clsx(
+                    'text-tiny flex flex-col items-center justify-center gap-1 py-2 font-medium transition-colors',
+                    isActive ? 'text-crimson' : 'text-ink-2 hover:text-crimson',
+                  )
+                }
               >
-                {({ isActive }) => (
-                  <>
-                    <span
-                      className={clsx(
-                        'rounded-full px-4 py-1 transition-colors',
-                        isActive ? 'bg-crimson-lt text-crimson' : 'text-ink-2',
-                      )}
-                    >
-                      <Icon className="size-5" />
-                    </span>
-                    <span>{link.label}</span>
-                  </>
-                )}
+                <Icon className="size-5" />
+                <span>{link.label}</span>
               </NavLink>
             );
           })}
