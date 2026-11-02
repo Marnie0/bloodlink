@@ -36,7 +36,7 @@ export default function AdminReportsPage() {
       render: (item) => (
         <>
           <b>{item.subject}</b>
-          <span className="ad-ref">{item.id}</span>
+          <span className="bl-admin-ref">{item.id}</span>
         </>
       ),
     },
@@ -45,7 +45,7 @@ export default function AdminReportsPage() {
       render: (item) => (
         <>
           <span>{item.account}</span>
-          <span className="ad-ref">{item.userId}</span>
+          <span className="bl-admin-ref">{item.userId}</span>
         </>
       ),
     },
@@ -74,11 +74,11 @@ export default function AdminReportsPage() {
       render: (item) => (
         <>
           <b>{item.name}</b>
-          <span className="ad-ref">{item.id}</span>
+          <span className="bl-admin-ref">{item.id}</span>
         </>
       ),
     },
-    { label: 'سبب الحظر', render: (item) => <span className="ad-table-issue">{item.reason}</span> },
+    { label: 'سبب الحظر', render: (item) => <span className="bl-admin-table-issue">{item.reason}</span> },
     { label: 'تاريخ الحظر', render: (item) => formatDate(item.date) },
     { label: 'الحالة', render: () => <Badge tone="danger">محظور حاليًا</Badge> },
     {
@@ -93,7 +93,7 @@ export default function AdminReportsPage() {
   }
   return (
     <>
-      <div className="ad-tabs" role="group" aria-label="عرض البلاغات أو الحسابات المحظورة">
+      <div className="bl-admin-tabs" role="group" aria-label="عرض البلاغات أو الحسابات المحظورة">
         <button aria-pressed={tab === 'reports'} onClick={() => changeTab('reports')}>
           <Flag size={18} /> البلاغات{' '}
           <span>{formatNumber(data.reports.filter((item) => item.status === 'open').length)}</span>
@@ -146,12 +146,12 @@ export default function AdminReportsPage() {
           onRowClick={(item) => (tab === 'reports' ? setSelectedId(item.id) : setUnbanId(item.id))}
         />
       </Panel>
-      <p className="ad-bottom-hint">
+      <p className="bl-admin-bottom-hint">
         راجع التفاصيل قبل اتخاذ القرار. إلغاء الحظر لا يغيّر قرار البلاغ السابق، ويُسجّل كإجراء مستقل.
       </p>
       {selected && (
         <Modal title="مراجعة البلاغ" subtitle={selected.id} onClose={() => setSelectedId(null)}>
-          <div className="ad-modal-section-title">
+          <div className="bl-admin-modal-section-title">
             <h3>{selected.subject}</h3>
             <Badge status={selected.status} />
           </div>
@@ -164,7 +164,7 @@ export default function AdminReportsPage() {
               ['التاريخ', formatDate(selected.date)],
             ]}
           />
-          <div className="ad-evidence">
+          <div className="bl-admin-evidence">
             <h3>وصف البلاغ</h3>
             <p>{selected.details}</p>
             <h3>المعلومات المتاحة · تجريبي</h3>

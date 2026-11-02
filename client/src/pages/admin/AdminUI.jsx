@@ -4,16 +4,16 @@ import { formatDate, formatNumber, statusLabels, statusTones } from './adminData
 
 export function Badge({ status, tone, children }) {
   return (
-    <span className={`ad-badge ad-${tone || statusTones[status] || 'neutral'}`}>
-      <span className="ad-dot" />
+    <span className={`bl-admin-badge bl-admin-${tone || statusTones[status] || 'neutral'}`}>
+      <span className="bl-admin-dot" />
       {children || statusLabels[status]}
     </span>
   );
 }
 export function Panel({ title, aside, children, className = '' }) {
   return (
-    <section className={`ad-panel ${className}`}>
-      <div className="ad-panel-head">
+    <section className={`bl-admin-panel ${className}`}>
+      <div className="bl-admin-panel-head">
         <h2>{title}</h2>
         {aside}
       </div>
@@ -23,7 +23,7 @@ export function Panel({ title, aside, children, className = '' }) {
 }
 export function EmptyState({ title = 'لا توجد نتائج', text = 'جرّب كلمة بحث أخرى أو غيّر التصفية.' }) {
   return (
-    <div className="ad-empty">
+    <div className="bl-admin-empty">
       <FileSearch size={32} />
       <h3>{title}</h3>
       <p>{text}</p>
@@ -32,8 +32,8 @@ export function EmptyState({ title = 'لا توجد نتائج', text = 'جرّ�
 }
 export function Filters({ query, onQuery, placeholder, status, onStatus, options, children }) {
   return (
-    <div className="ad-filters">
-      <label className="ad-search">
+    <div className="bl-admin-filters">
+      <label className="bl-admin-search">
         <Search size={18} />
         <input
           type="search"
@@ -44,8 +44,8 @@ export function Filters({ query, onQuery, placeholder, status, onStatus, options
         />
       </label>
       {options && (
-        <label className="ad-select-label">
-          <span className="ad-sr">تصفية حسب الحالة</span>
+        <label className="bl-admin-select-label">
+          <span className="bl-admin-sr">تصفية حسب الحالة</span>
           <select value={status} onChange={(event) => onStatus(event.target.value)}>
             {options.map(([value, label]) => (
               <option key={value} value={value}>
@@ -65,9 +65,9 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
   const start = (current - 1) * pageSize;
   return (
     <>
-      <div className="ad-table-wrap">
-        <table className="ad-table">
-          <caption className="ad-sr">{caption}</caption>
+      <div className="bl-admin-table-wrap">
+        <table className="bl-admin-table">
+          <caption className="bl-admin-sr">{caption}</caption>
           <thead>
             <tr>
               {columns.map((column) => (
@@ -81,7 +81,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
             {rows.slice(start, start + pageSize).map((row) => (
               <tr
                 key={row.id}
-                className={onRowClick ? 'ad-clickable-row' : undefined}
+                className={onRowClick ? 'bl-admin-clickable-row' : undefined}
                 onClick={
                   onRowClick
                     ? (event) => {
@@ -106,7 +106,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
         </table>
         {!rows.length && <EmptyState />}
       </div>
-      <div className="ad-pagination">
+      <div className="bl-admin-pagination">
         <span>
           {rows.length
             ? `عرض ${formatNumber(start + 1)}–${formatNumber(Math.min(start + pageSize, rows.length))} من ${formatNumber(rows.length)} سجل`
@@ -114,7 +114,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
         </span>
         <div>
           <button
-            className="ad-page-btn"
+            className="bl-admin-page-btn"
             aria-label="الصفحة السابقة"
             disabled={current === 1}
             onClick={() => onPage(current - 1)}
@@ -123,7 +123,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
           </button>
           {Array.from({ length: pages }, (_, index) => (
             <button
-              className="ad-page-btn"
+              className="bl-admin-page-btn"
               key={index}
               aria-label={`صفحة ${index + 1}`}
               aria-current={current === index + 1 ? 'page' : undefined}
@@ -133,7 +133,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
             </button>
           ))}
           <button
-            className="ad-page-btn"
+            className="bl-admin-page-btn"
             aria-label="الصفحة التالية"
             disabled={current === pages}
             onClick={() => onPage(current + 1)}
@@ -163,8 +163,8 @@ export function Modal({ title, subtitle, children, onClose, wide = false }) {
   return (
     <dialog
       ref={dialog}
-      className={`ad-modal ${wide ? 'ad-modal-wide' : ''}`}
-      aria-labelledby="ad-dialog-title"
+      className={`bl-admin-modal ${wide ? 'bl-admin-modal-wide' : ''}`}
+      aria-labelledby="bl-admin-dialog-title"
       onCancel={onClose}
       onClick={(event) => {
         if (event.target === event.currentTarget) {
@@ -179,18 +179,18 @@ export function Modal({ title, subtitle, children, onClose, wide = false }) {
         }
       }}
     >
-      <div className="ad-modal-head">
+      <div className="bl-admin-modal-head">
         <div>
-          <h2 ref={heading} tabIndex={-1} id="ad-dialog-title">
+          <h2 ref={heading} tabIndex={-1} id="bl-admin-dialog-title">
             {title}
           </h2>
           {subtitle && <p>{subtitle}</p>}
         </div>
-        <button type="button" className="ad-icon-btn" aria-label="إغلاق" onClick={onClose}>
+        <button type="button" className="bl-admin-icon-btn" aria-label="إغلاق" onClick={onClose}>
           <X size={20} />
         </button>
       </div>
-      <div className="ad-modal-body">{children}</div>
+      <div className="bl-admin-modal-body">{children}</div>
     </dialog>
   );
 }
@@ -206,16 +206,19 @@ export function DecisionForm({
   const selected = options.find((option) => option.value === action);
   return (
     <form
-      className="ad-decision"
+      className="bl-admin-decision"
       onSubmit={(event) => {
         event.preventDefault();
         if (note.trim().length >= 5) onSubmit(action, note.trim());
       }}
     >
       <h3>قرار المراجعة</h3>
-      <div className="ad-decisions">
+      <div className="bl-admin-decisions">
         {options.map((option) => (
-          <label className={`ad-choice ${action === option.value ? 'ad-selected' : ''}`} key={option.value}>
+          <label
+            className={`bl-admin-choice ${action === option.value ? 'bl-admin-selected' : ''}`}
+            key={option.value}
+          >
             <input
               type="radio"
               name="decision"
@@ -227,8 +230,8 @@ export function DecisionForm({
           </label>
         ))}
       </div>
-      <label className="ad-field">
-        {noteLabel} <span className="ad-required">*</span>
+      <label className="bl-admin-field">
+        {noteLabel} <span className="bl-admin-required">*</span>
         <textarea
           required
           minLength={5}
@@ -237,22 +240,22 @@ export function DecisionForm({
           onChange={(event) => setNote(event.target.value)}
           placeholder="اكتب السبب هنا…"
           rows={3}
-          aria-describedby="ad-note-hint"
+          aria-describedby="bl-admin-note-hint"
         />
       </label>
-      <p id="ad-note-hint" className="ad-hint">
+      <p id="bl-admin-note-hint" className="bl-admin-hint">
         {noteHint} خمسة أحرف على الأقل.
       </p>
-      <div className="ad-actions">
+      <div className="bl-admin-actions">
         <button
           type="submit"
-          className={`ad-btn ${['banned', 'rejected'].includes(action) ? 'ad-btn-danger' : 'ad-btn-primary'}`}
+          className={`bl-admin-btn ${['banned', 'rejected'].includes(action) ? 'bl-admin-btn-danger' : 'bl-admin-btn-primary'}`}
           disabled={note.trim().length < 5}
         >
           <Check size={17} />
           {selected.confirm || 'تأكيد القرار'}
         </button>
-        <button type="button" className="ad-btn ad-btn-outline" onClick={onCancel}>
+        <button type="button" className="bl-admin-btn bl-admin-btn-outline" onClick={onCancel}>
           إلغاء
         </button>
       </div>
@@ -261,7 +264,7 @@ export function DecisionForm({
 }
 export function Details({ items }) {
   return (
-    <dl className="ad-details">
+    <dl className="bl-admin-details">
       {items.map(([label, value]) => (
         <div key={label}>
           <dt>{label}</dt>
@@ -273,7 +276,7 @@ export function Details({ items }) {
 }
 export function ReviewNote({ item }) {
   return (
-    <div className="ad-review-note">
+    <div className="bl-admin-review-note">
       <Badge status={item.status} />
       <p>{item.note || 'تمت مراجعة هذا الطلب.'}</p>
       {item.reviewedAt && <small>تاريخ القرار: {formatDate(item.reviewedAt, true)}</small>}
@@ -282,18 +285,18 @@ export function ReviewNote({ item }) {
 }
 export function SampleDocument({ item, hospital = false }) {
   return (
-    <div className="ad-document-area">
-      <div className="ad-document-label">
+    <div className="bl-admin-document-area">
+      <div className="bl-admin-document-label">
         <span>معاينة المستند</span>
         <Badge tone="neutral">نموذج تجريبي</Badge>
       </div>
-      <article className="ad-document" aria-label="نموذج مستند تجريبي">
-        <div className="ad-document-watermark">عينة تجريبية</div>
-        <div className="ad-document-brand">
+      <article className="bl-admin-document" aria-label="نموذج مستند تجريبي">
+        <div className="bl-admin-document-watermark">عينة تجريبية</div>
+        <div className="bl-admin-document-brand">
           {hospital ? item.name : item.hospital}
           <small>{item.area}</small>
         </div>
-        <div className="ad-document-rule" />
+        <div className="bl-admin-document-rule" />
         <h3>
           {hospital
             ? 'طلب انضمام مستشفى شريك'
@@ -319,19 +322,21 @@ export function SampleDocument({ item, hospital = false }) {
                 ]
           }
         />
-        <div className="ad-document-sign">
+        <div className="bl-admin-document-sign">
           <span>
             توقيع المسؤول
             <br />
             <i>ــــــــــــــــــــ</i>
           </span>
-          <span className="ad-stamp">
+          <span className="bl-admin-stamp">
             نموذج
             <br />
             غير رسمي
           </span>
         </div>
-        <p className="ad-document-foot">مستند توضيحي للواجهة فقط · ليس مستندًا طبيًا أو ترخيصًا حقيقيًا</p>
+        <p className="bl-admin-document-foot">
+          مستند توضيحي للواجهة فقط · ليس مستندًا طبيًا أو ترخيصًا حقيقيًا
+        </p>
       </article>
     </div>
   );
@@ -340,7 +345,7 @@ export function ReviewButton({ onClick, children = 'مراجعة' }) {
   return (
     <button
       type="button"
-      className="ad-btn ad-btn-outline ad-btn-small"
+      className="bl-admin-btn bl-admin-btn-outline bl-admin-btn-small"
       aria-haspopup="dialog"
       onClick={(event) => {
         event.currentTarget.focus({ preventScroll: true });

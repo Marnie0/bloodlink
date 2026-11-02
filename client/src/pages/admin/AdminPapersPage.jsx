@@ -37,7 +37,7 @@ export default function AdminPapersPage() {
       render: (item) => (
         <>
           <b>{item.name}</b>
-          <span className="ad-ref">{item.id}</span>
+          <span className="bl-admin-ref">{item.id}</span>
         </>
       ),
     },
@@ -50,12 +50,12 @@ export default function AdminPapersPage() {
         </>
       ),
     },
-    { label: 'الفصيلة', render: (item) => <span className="ad-blood">{item.blood}</span> },
+    { label: 'الفصيلة', render: (item) => <span className="bl-admin-blood">{item.blood}</span> },
     {
       label: 'سبب المراجعة',
       render: (item) => (
         <>
-          <span className="ad-table-issue">{item.issue}</span>
+          <span className="bl-admin-table-issue">{item.issue}</span>
           {item.urgent && <Badge tone="danger">عاجل</Badge>}
         </>
       ),
@@ -72,7 +72,7 @@ export default function AdminPapersPage() {
   ];
   return (
     <>
-      <div className="ad-inline-notice">
+      <div className="bl-admin-inline-notice">
         <Info size={20} />
         <p>
           الأوراق هنا تحتاج إلى مراجعة بشرية. القبول يمنح علامة <b>«ورقة تبدو سليمة»</b>، ولا يُعد تأكيدًا من
@@ -106,8 +106,8 @@ export default function AdminPapersPage() {
             ['rejected', 'المرفوضة'],
           ]}
         >
-          <label className="ad-select-label">
-            <span className="ad-sr">نوع المستند</span>
+          <label className="bl-admin-select-label">
+            <span className="bl-admin-sr">نوع المستند</span>
             <select
               value={type}
               onChange={(event) => {
@@ -130,15 +130,15 @@ export default function AdminPapersPage() {
           onRowClick={(item) => setParams({ review: item.id })}
         />
       </Panel>
-      <p className="ad-bottom-hint">
+      <p className="bl-admin-bottom-hint">
         المستندات مخصّصة للمراجعة الإدارية؛ بيانات هذه الواجهة ونماذج الأوراق تجريبية بالكامل.
       </p>
       {selected && (
         <Modal wide title="مراجعة الورقة" subtitle={selected.id} onClose={close}>
-          <div className="ad-review-grid">
+          <div className="bl-admin-review-grid">
             <SampleDocument item={selected} />
             <div>
-              <div className="ad-modal-section-title">
+              <div className="bl-admin-modal-section-title">
                 <h3>بيانات الطلب</h3>
                 <Badge status={selected.status} />
               </div>
@@ -150,7 +150,7 @@ export default function AdminPapersPage() {
                   ['تاريخ الإرسال', formatDate(selected.date)],
                 ]}
               />
-              <div className="ad-inline-notice ad-notice-warn">
+              <div className="bl-admin-inline-notice bl-admin-notice-warn">
                 <Info size={18} />
                 <p>{selected.issue}</p>
               </div>
