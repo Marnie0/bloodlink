@@ -14,7 +14,7 @@ export default function BottomTabBar() {
     <>
       <div className="h-19 lg:hidden" />
       <nav
-        className="bg-surface/90 border-line fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] mx-auto max-w-lg rounded-2xl border shadow-lg backdrop-blur lg:hidden"
+        className="bg-surface/90 hc:bg-surface border-line fixed inset-x-3 bottom-[max(0.75rem,env(safe-area-inset-bottom))] mx-auto max-w-lg rounded-2xl border shadow-lg backdrop-blur lg:hidden"
         aria-label="القائمة الرئيسية للشاشات الصغيرة"
       >
         <div className="grid grid-cols-5">
@@ -28,7 +28,7 @@ export default function BottomTabBar() {
                 className={({ isActive }) =>
                   clsx(
                     'text-tiny flex flex-col items-center justify-center gap-1 py-2 font-medium transition-colors',
-                    isActive ? 'text-crimson' : 'text-ink-2',
+                    isActive ? 'text-crimson hc:outline-2 hc:outline-black' : 'text-ink-2',
                   )
                 }
               >

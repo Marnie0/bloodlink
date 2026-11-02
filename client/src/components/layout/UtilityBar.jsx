@@ -6,10 +6,17 @@ export default function UtilityBar() {
     document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
   );
 
+  const [highContrast, setHighContrast] = useState(() => document.documentElement.classList.contains('hc'));
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem('bl-theme', theme);
   }, [theme]);
+
+  useEffect(() => {
+    localStorage.setItem('bl-high-contrast', highContrast.toString());
+    document.documentElement.classList.toggle('hc', highContrast);
+  }, [highContrast]);
 
   const today = new Date();
   const arabicDate = new Intl.DateTimeFormat('ar-EG', { dateStyle: 'full' }).format(today);
@@ -24,7 +31,8 @@ export default function UtilityBar() {
         <div className="flex items-center gap-5">
           <button
             type="button"
-            aria-pressed="false"
+            aria-pressed={highContrast}
+            onClick={() => setHighContrast(!highContrast)}
             className="btn btn-ghost btn-xs aria-pressed:bg-navy border-line rounded-full aria-pressed:text-white"
           >
             <Contrast className="size-4" aria-hidden="true" />

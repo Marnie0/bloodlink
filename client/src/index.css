@@ -41,7 +41,8 @@
   --noise: 0;
 }
 
-/* Theme switches live on <html>: data-theme="dark" and class "hc" (see useA11yPrefs) */
+/* Theme switches live on <html>: data-theme="dark" and class "hc"
+   (set by UtilityBar.jsx, and on load by the script in index.html) */
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @custom-variant hc (&:where(.hc, .hc *));
 
@@ -100,18 +101,18 @@
 /* crimson gradient - primary buttons, urgent card, QR ticket top */
 @utility bg-urgent {
   background-image: linear-gradient(135deg, #8e0d2f 0%, #c41e45 55%, #d13d3d 100%);
+
+  /* high contrast: solid dark red, no gradient (DevKit: --grad: #8B0000) */
+  @variant hc {
+    background-image: none;
+    background-color: #8b0000;
+  }
 }
 
 @layer base {
   html {
     font-size: 16px;
   }
-  html.fs-s {
-    font-size: 14.5px;
-  } /* A-  - everything is rem, so it all scales */
-  html.fs-l {
-    font-size: 18px;
-  } /* A+ */
 
   body {
     @apply bg-canvas font-body text-ink antialiased;
@@ -167,6 +168,7 @@
   .hc[data-theme] {
     color-scheme: light;
     --color-canvas: #ffffff;
+    --color-surface: #ffffff;
     --color-surface-2: #ffffff;
     --color-line: #000000;
     --color-line-2: #000000;

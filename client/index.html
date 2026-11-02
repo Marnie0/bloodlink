@@ -6,6 +6,9 @@
       if (localStorage.getItem('bl-theme') === 'dark') {
         document.documentElement.dataset.theme = 'dark';
       }
+      if (localStorage.getItem('bl-high-contrast') === 'true') {
+        document.documentElement.classList.add('hc');
+      }
     </script>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
