@@ -1,4 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
+import UtilityBar from '@/components/layout/UtilityBar';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import BottomTabBar from '@/components/layout/BottomTabBar';
@@ -25,6 +26,7 @@ import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
 export default function App() {
   return (
     <>
+      <UtilityBar />
       <Header />
       <main>
         <Routes>
