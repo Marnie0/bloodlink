@@ -12,7 +12,10 @@ const links = [
 
 export default function MainNav() {
   return (
-    <nav aria-label="القائمة الرئيسية" className="bg-navy border-gold hidden border-b-2 lg:block">
+    <nav
+      aria-label="القائمة الرئيسية"
+      className="bg-navy border-gold hc:bg-black hidden border-b-2 lg:block dark:bg-[#102236]"
+    >
       <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-2">
         <div className="flex items-center gap-2">
           {links.map((link) => (
@@ -24,7 +27,7 @@ export default function MainNav() {
                 clsx(
                   'focus-visible:outline-gold rounded-full px-3 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
                   isActive
-                    ? 'bg-white font-semibold text-[#0E2A47]'
+                    ? 'hc:text-black bg-white font-semibold text-[#0E2A47]'
                     : 'font-medium text-white hover:bg-white/10',
                 )
               }
@@ -37,8 +40,10 @@ export default function MainNav() {
           to="/requests/new"
           className={({ isActive }) =>
             clsx(
-              'btn btn-primary rounded-full',
-              isActive ? 'hover:bg-primary bg-white text-[#0E2A47] hover:text-white' : 'text-white',
+              'btn rounded-full border-0',
+              isActive
+                ? 'hc:text-black hover:bg-urgent bg-white font-semibold text-[#0E2A47] hover:text-white'
+                : 'bg-urgent text-white',
             )
           }
         >
