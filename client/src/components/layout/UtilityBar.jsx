@@ -5,14 +5,22 @@ export default function UtilityBar() {
   const [theme, setTheme] = useState(() =>
     document.documentElement.dataset.theme === 'dark' ? 'dark' : 'light',
   );
+
   useEffect(() => {
     document.documentElement.dataset.theme = theme;
     localStorage.setItem('bl-theme', theme);
   }, [theme]);
+
+  const today = new Date();
+  const arabicDate = new Intl.DateTimeFormat('ar-EG', { dateStyle: 'full' }).format(today);
+  const isoDate = today.toISOString().split('T')[0];
+
   return (
     <div className="bg-surface border-line text-ink-2 border-b text-[0.8rem]">
       <div className="xs:justify-between mx-auto flex min-h-9 max-w-7xl items-center justify-center px-4">
-        <span className="text-tiny text-ink-2 sm:text-small xs:block hidden">تاريخ تجريبي 22-10-2020</span>
+        <time className="text-tiny text-ink-2 sm:text-small xs:block hidden" dateTime={isoDate}>
+          {arabicDate}
+        </time>
         <div className="flex items-center gap-5">
           <button
             type="button"
