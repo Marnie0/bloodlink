@@ -4,7 +4,7 @@ import { House, Heart, Droplet, Calendar, Hospital } from 'lucide-react';
 const links = [
   { to: '/', label: 'الرئيسية', end: true, icon: House },
   { to: '/donor/requests', label: 'الطلبات', end: true, icon: Heart },
-  { to: '/donor/requests/new', label: 'طلب دم', icon: Droplet },
+  { to: '/requests/new', label: 'طلب دم', icon: Droplet },
   { to: '/donor/history', label: 'موعدي', icon: Calendar },
   { to: '/hospital', label: 'المستشفى', icon: Hospital },
 ];
