@@ -3,6 +3,10 @@ import MainNav from './MainNav';
 import { Link } from 'react-router-dom';
 import { Bell, LogIn, Search } from 'lucide-react';
 
+function handleSearch(e) {
+  e.preventDefault();
+}
+
 export default function Header() {
   return (
     <header className="border-line bg-surface border-b">
@@ -11,6 +15,7 @@ export default function Header() {
         <div className="flex items-center gap-2 md:gap-3">
           <form
             role="search"
+            onSubmit={handleSearch}
             className="border-line bg-surface-2 hidden items-center rounded-full border ps-4 lg:flex"
           >
             <input
