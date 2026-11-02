@@ -76,25 +76,25 @@ export default function AdminDashboardPage() {
   const pendingPapers = data.papers.filter((item) => item.status === 'pending');
   return (
     <>
-      <div className="ad-section-heading">
+      <div className="bl-admin-section-heading">
         <div>
           <h2>أهلًا خالد، يوم جديد وفرصة للمساعدة</h2>
           <p>إليك ملخص المنصة وما يحتاج إلى متابعتك.</p>
         </div>
         <Badge tone="neutral">إحصائيات توضيحية</Badge>
       </div>
-      <div className="ad-stats">
+      <div className="bl-admin-stats">
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
-            <section className="ad-stat" key={stat.title}>
-              <div className="ad-stat-top">
+            <section className="bl-admin-stat" key={stat.title}>
+              <div className="bl-admin-stat-top">
                 <span>{stat.title}</span>
-                <span className={`ad-icon-tile ad-${stat.tone}`}>
+                <span className={`bl-admin-icon-tile bl-admin-${stat.tone}`}>
                   <Icon size={21} />
                 </span>
               </div>
-              <div className="ad-stat-value">
+              <div className="bl-admin-stat-value">
                 {stat.value}
                 <small>{stat.unit}</small>
               </div>
@@ -103,24 +103,24 @@ export default function AdminDashboardPage() {
           );
         })}
       </div>
-      <h2 className="ad-section-title">
+      <h2 className="bl-admin-section-title">
         يحتاج إلى اهتمامك
         <span />
       </h2>
-      <div className="ad-queue-grid">
+      <div className="bl-admin-queue-grid">
         {queues.map((queue) => {
           const Icon = queue.icon;
           return (
-            <Link className="ad-queue" key={queue.to} to={queue.to}>
-              <div className="ad-queue-top">
-                <span className={`ad-icon-tile ad-${queue.tone}`}>
+            <Link className="bl-admin-queue" key={queue.to} to={queue.to}>
+              <div className="bl-admin-queue-top">
+                <span className={`bl-admin-icon-tile bl-admin-${queue.tone}`}>
                   <Icon size={22} />
                 </span>
                 <strong>{formatNumber(queue.count)}</strong>
               </div>
               <h3>{queue.title}</h3>
               <p>{queue.text}</p>
-              <span className="ad-queue-link">
+              <span className="bl-admin-queue-link">
                 فتح قائمة المراجعة
                 <ArrowLeft size={17} />
               </span>
@@ -128,21 +128,21 @@ export default function AdminDashboardPage() {
           );
         })}
       </div>
-      <div className="ad-dashboard-grid">
+      <div className="bl-admin-dashboard-grid">
         <Panel
           title="أحدث الأوراق المعلّقة"
           aside={
-            <Link className="ad-text-link" to="/admin/papers">
+            <Link className="bl-admin-text-link" to="/admin/papers">
               عرض الكل
               <ArrowLeft size={15} />
             </Link>
           }
         >
           {pendingPapers.length ? (
-            <div className="ad-pending-list">
+            <div className="bl-admin-pending-list">
               {pendingPapers.slice(0, 3).map((item) => (
-                <Link key={item.id} className="ad-pending-item" to={`/admin/papers?review=${item.id}`}>
-                  <span className="ad-file-icon">
+                <Link key={item.id} className="bl-admin-pending-item" to={`/admin/papers?review=${item.id}`}>
+                  <span className="bl-admin-file-icon">
                     <FileCheck2 size={22} />
                   </span>
                   <div>
@@ -150,9 +150,9 @@ export default function AdminDashboardPage() {
                     <small>
                       {item.type} · {item.hospital}
                     </small>
-                    <span className="ad-ref">{item.id}</span>
+                    <span className="bl-admin-ref">{item.id}</span>
                   </div>
-                  <span className="ad-pending-end">
+                  <span className="bl-admin-pending-end">
                     <Badge tone={item.urgent ? 'danger' : 'warn'}>
                       {item.urgent ? 'عاجل' : 'مراجعة يدوية'}
                     </Badge>
@@ -165,11 +165,11 @@ export default function AdminDashboardPage() {
             <EmptyState title="انتهيت من مراجعة الأوراق" text="لا توجد أوراق معلّقة في النسخة التجريبية." />
           )}
         </Panel>
-        <Panel title="آخر إجراءات الإدارة" aside={<span className="ad-small">سجل محلي</span>}>
-          <ol className="ad-timeline">
+        <Panel title="آخر إجراءات الإدارة" aside={<span className="bl-admin-small">سجل محلي</span>}>
+          <ol className="bl-admin-timeline">
             {data.activities.slice(0, 4).map((item) => (
               <li key={item.id}>
-                <span className={`ad-timeline-dot ad-${item.tone}`} />
+                <span className={`bl-admin-timeline-dot bl-admin-${item.tone}`} />
                 <div>
                   <p>{item.text}</p>
                   <time dateTime={item.date}>{formatDate(item.date, true)}</time>
@@ -179,7 +179,7 @@ export default function AdminDashboardPage() {
           </ol>
         </Panel>
       </div>
-      <div className="ad-guidance">
+      <div className="bl-admin-guidance">
         <ShieldCheck size={29} />
         <div>
           <h3>مراجعة دقيقة، ومجتمع أكثر أمانًا</h3>
@@ -188,7 +188,7 @@ export default function AdminDashboardPage() {
             الشريك.
           </p>
         </div>
-        <Link to="/admin/papers" className="ad-btn ad-btn-outline ad-btn-small">
+        <Link to="/admin/papers" className="bl-admin-btn bl-admin-btn-outline bl-admin-btn-small">
           مراجعة الأوراق
           <ArrowLeft size={15} />
         </Link>

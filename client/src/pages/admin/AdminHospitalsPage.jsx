@@ -29,13 +29,13 @@ export default function AdminHospitalsPage() {
     {
       label: 'المستشفى',
       render: (item) => (
-        <div className="ad-hospital-cell">
-          <span className="ad-hospital-icon">
+        <div className="bl-admin-hospital-cell">
+          <span className="bl-admin-hospital-icon">
             <Building2 size={21} />
           </span>
           <div>
             <b>{item.name}</b>
-            <span className="ad-ref">{item.id}</span>
+            <span className="bl-admin-ref">{item.id}</span>
           </div>
         </div>
       ),
@@ -70,7 +70,7 @@ export default function AdminHospitalsPage() {
   ];
   return (
     <>
-      <div className="ad-hospital-summary">
+      <div className="bl-admin-hospital-summary">
         {[
           {
             icon: Clock3,
@@ -89,7 +89,7 @@ export default function AdminHospitalsPage() {
           const Icon = stat.icon;
           return (
             <div key={stat.label}>
-              <span className={`ad-icon-tile ad-${stat.tone}`}>
+              <span className={`bl-admin-icon-tile bl-admin-${stat.tone}`}>
                 <Icon size={22} />
               </span>
               <span>
@@ -129,15 +129,15 @@ export default function AdminHospitalsPage() {
           onRowClick={(item) => setSelectedId(item.id)}
         />
       </Panel>
-      <p className="ad-bottom-hint">
+      <p className="bl-admin-bottom-hint">
         حساب المستشفى يظل غير نشط حتى الاعتماد. في هذه النسخة، يتغير وضع الطلب محليًا فقط.
       </p>
       {selected && (
         <Modal wide title="مراجعة طلب الشراكة" subtitle={selected.id} onClose={() => setSelectedId(null)}>
-          <div className="ad-review-grid">
+          <div className="bl-admin-review-grid">
             <SampleDocument item={selected} hospital />
             <div>
-              <div className="ad-modal-section-title">
+              <div className="bl-admin-modal-section-title">
                 <h3>بيانات المنشأة</h3>
                 <Badge status={selected.status} />
               </div>
