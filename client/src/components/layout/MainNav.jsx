@@ -34,7 +34,7 @@ export default function MainNav() {
           ))}
         </div>
         <NavLink
-          to="/donor/requests/new"
+          to="/requests/new"
           className={({ isActive }) =>
             clsx(
               'btn btn-primary rounded-full',
