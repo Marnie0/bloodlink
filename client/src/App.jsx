@@ -27,9 +27,9 @@ export default function App() {
   const { pathname } = useLocation();
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');
   return (
-    <>
+    <div className="flex min-h-dvh flex-col">
       {!isAdmin && <Header />}
-      <main>
+      <main className="flex-1">
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="signup" element={<SignupPage />} />
@@ -68,6 +68,6 @@ export default function App() {
       </main>
       {!isAdmin && <Footer />}
       {!isAdmin && <BottomTabBar />}
-    </>
+    </div>
   );
 }
