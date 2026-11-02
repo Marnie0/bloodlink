@@ -1,4 +1,5 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
+import UtilityBar from '@/components/layout/UtilityBar';
 import AdminLayout from '@/pages/admin/AdminLayout';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
@@ -28,6 +29,7 @@ export default function App() {
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');
   return (
     <div className="flex min-h-dvh flex-col">
+      {!isAdmin && <UtilityBar />}
       {!isAdmin && <Header />}
       <main className="flex-1">
         <Routes>

@@ -24,7 +24,7 @@ export default function MainNav() {
                 clsx(
                   'focus-visible:outline-gold rounded-full px-3 py-2 text-sm transition-colors focus-visible:outline-2 focus-visible:outline-offset-2',
                   isActive
-                    ? 'bg-surface text-navy font-semibold'
+                    ? 'bg-white font-semibold text-[#0E2A47]'
                     : 'font-medium text-white hover:bg-white/10',
                 )
               }
@@ -38,7 +38,7 @@ export default function MainNav() {
           className={({ isActive }) =>
             clsx(
               'btn btn-primary rounded-full',
-              isActive ? 'bg-surface text-navy hover:bg-primary hover:text-white' : 'text-white',
+              isActive ? 'hover:bg-primary bg-white text-[#0E2A47] hover:text-white' : 'text-white',
             )
           }
         >
