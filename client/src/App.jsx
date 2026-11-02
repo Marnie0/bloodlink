@@ -1,4 +1,5 @@
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
+import AdminLayout from '@/pages/admin/AdminLayout';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import BottomTabBar from '@/components/layout/BottomTabBar';
@@ -23,9 +24,11 @@ import AdminReportsPage from '@/pages/admin/AdminReportsPage';
 import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
 
 export default function App() {
+  const { pathname } = useLocation();
+  const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');
   return (
     <>
-      <Header />
+      {!isAdmin && <Header />}
       <main>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -52,18 +55,19 @@ export default function App() {
             <Route path="join" element={<HospitalJoinPage />} />
           </Route>
 
-          <Route path="admin">
+          <Route path="admin" element={<AdminLayout />}>
             <Route index element={<AdminDashboardPage />} />
             <Route path="papers" element={<AdminPapersPage />} />
             <Route path="reports" element={<AdminReportsPage />} />
             <Route path="hospitals" element={<AdminHospitalsPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      <Footer />
-      <BottomTabBar />
+      {!isAdmin && <Footer />}
+      {!isAdmin && <BottomTabBar />}
     </>
   );
 }
