@@ -15,7 +15,11 @@ export default function LoginPage() {
       </div>
 
       <div className="mx-auto max-w-[460px] px-4 py-8">
-        <form onSubmit={handleSubmit} className="bg-surface border-line rounded-card shadow-card border">
+        <form
+          onSubmit={handleSubmit}
+          noValidate
+          className="bg-surface border-line rounded-card shadow-card border"
+        >
           <div className="border-line-2 border-b px-[18px] py-3.5">
             <h1 className="flex items-center gap-2.5 text-[1.15rem] font-extrabold">
               <span aria-hidden="true" className="bg-gold inline-block h-[18px] w-1 rounded" />
