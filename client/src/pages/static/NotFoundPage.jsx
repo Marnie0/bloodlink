@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 const NotFoundPage = () => {
   return (
     <section className="min-h-[70vh] px-4 py-16 text-center sm:py-24">
+
       <span
         dir="ltr"
         className="font-head text-crimson block text-[4.5rem] leading-none font-extrabold tabular-nums"
@@ -33,7 +34,9 @@ const NotFoundPage = () => {
           تقديم طلب دم
         </Link>
       </div>
+
     </section>
+
   );
 };
 
