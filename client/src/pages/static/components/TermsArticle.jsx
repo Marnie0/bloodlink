@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Notice from '@/components/ui/Notice';
 
 const TermsArticle = () => {

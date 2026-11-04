@@ -1,5 +1,3 @@
-import React from 'react';
-
 const PageHeader = () => {
   return (
     <div className="rounded-hero from-navy via-navy-2 to-teal shadow-raised hc:bg-black hc:bg-none relative mt-2.5 overflow-hidden bg-linear-120 via-45% text-white">
@@ -9,10 +7,9 @@ const PageHeader = () => {
       />
       <div
         aria-hidden
-        className="hc:hidden absolute -start-20 -top-[120px] size-[260px] rounded-full border-[34px] border-white/5"
+        className="hc:hidden --inset-s-20 absolute -top-30 size-65 rounded-full border-34 border-white/5"
       />
-
-      <div className="relative flex flex-wrap items-end justify-between gap-3 px-4 py-5 sm:px-[22px]">
+      <div className="relative flex flex-wrap items-end justify-between gap-3 px-4 py-5 sm:px-5.5">
         <div className="min-w-0">
           <h1 className="font-head m-0 text-[1.45rem] font-extrabold text-white md:text-[1.8rem]">
             شروط الاستخدام

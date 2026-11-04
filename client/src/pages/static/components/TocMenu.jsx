@@ -1,5 +1,3 @@
-import React from 'react';
-
 const TocMenu = () => {
   const item = 'flex items-center justify-between rounded-[10px] px-3 py-[9px] text-small text-ink';
 

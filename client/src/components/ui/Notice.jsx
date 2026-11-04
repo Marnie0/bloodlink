@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Notice = ({ tone = 'info', title, children }) => {
   const tones = {
