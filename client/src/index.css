@@ -126,6 +126,13 @@
     line-height: 1.4;
   }
 
+  /* Tailwind v4 gives buttons the default arrow cursor; bring back the pointer
+     (daisyUI's .btn already has it, plain <button>s don't) */
+  button:not(:disabled),
+  [role='button']:not(:disabled) {
+    cursor: pointer;
+  }
+
   /* yellow ring + navy halo: visible on light, dark and on the gradient */
   :focus-visible {
     outline: 3px solid var(--color-focus);
