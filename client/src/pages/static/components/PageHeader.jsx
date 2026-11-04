@@ -9,7 +9,6 @@ const PageHeader = () => {
         aria-hidden
         className="hc:hidden --inset-s-20 absolute -top-30 size-65 rounded-full border-34 border-white/5"
       />
-
       <div className="relative flex flex-wrap items-end justify-between gap-3 px-4 py-5 sm:px-5.5">
         <div className="min-w-0">
           <h1 className="font-head m-0 text-[1.45rem] font-extrabold text-white md:text-[1.8rem]">

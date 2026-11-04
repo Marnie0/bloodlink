@@ -10,7 +10,6 @@ const TermsPage = () => {
         <Breadcrumb items={[{ label: 'الرئيسية', to: '/' }, { label: 'شروط الاستخدام' }]} />
         <PageHeader />
       </div>
-
       <main className="mx-auto w-full max-w-310 px-4 pt-5.5 pb-10 md:px-6">
         <div className="grid grid-cols-[minmax(0,1fr)] items-start gap-5 lg:grid-cols-[300px_minmax(0,1fr)]">
           <aside>
