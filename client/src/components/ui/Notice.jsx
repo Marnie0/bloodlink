@@ -1,4 +1,3 @@
-
 const Notice = ({ tone = 'info', title, children }) => {
   const tones = {
     info: { box: 'bg-info-lt border-info', icon: 'bg-info', glyph: 'i' },
