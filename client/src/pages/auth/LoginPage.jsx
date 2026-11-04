@@ -1,13 +1,39 @@
-import { Link } from 'react-router-dom';
-import { Eye } from 'lucide-react';
+import { Link, useNavigate } from 'react-router-dom';
+import { Eye, EyeOff } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
-
-function handleSubmit(event) {
-  event.preventDefault();
-  // Handle form submission logic here
-}
+import Notice from '@/components/ui/Notice';
+import { login } from '@/pages/auth/auth';
+import { useState } from 'react';
 
 export default function LoginPage() {
+  const [error, setError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const navigate = useNavigate();
+
+  async function handleSubmit(e) {
+    e.preventDefault();
+    const data = new FormData(e.currentTarget);
+    const identifier = data.get('identifier');
+    const password = data.get('password');
+
+    if (!identifier.trim() || !password.trim()) {
+      setError('الرجاء إدخال البريد الإلكتروني أو رقم الهاتف وكلمة المرور.');
+      return;
+    }
+
+    setSubmitting(true);
+    setError('');
+    try {
+      await login({ identifier, password });
+      navigate('/', { replace: true });
+    } catch (err) {
+      setError(err.message || 'حدث خطأ أثناء تسجيل الدخول. الرجاء المحاولة لاحقاً.');
+    } finally {
+      setSubmitting(false);
+    }
+  }
+
   return (
     <>
       <div className="mx-auto max-w-7xl px-4">
@@ -28,6 +54,13 @@ export default function LoginPage() {
           </div>
 
           <div className="p-4.5 lg:p-6">
+            <div role="alert">
+              {error && (
+                <Notice tone="err" title="لم نتمكن من تسجيل دخولك">
+                  {error}
+                </Notice>
+              )}
+            </div>
             <div className="mb-3.5">
               <label htmlFor="identifier" className="mb-1 block text-[0.86rem] font-semibold">
                 البريد الإلكتروني أو رقم الهاتف
@@ -51,17 +84,23 @@ export default function LoginPage() {
                 <input
                   id="password"
                   name="password"
-                  type="password"
+                  type={visible ? 'text' : 'password'}
                   dir="ltr"
                   autoComplete="current-password"
                   className="rounded-field border-line bg-surface-2 focus:border-navy focus:bg-surface w-full border py-2.5 ps-10 pe-3 lg:py-3"
                 />
                 <button
                   type="button"
-                  aria-label="إظهار كلمة المرور"
+                  onClick={() => setVisible((v) => !v)}
+                  aria-label={visible ? 'إخفاء كلمة المرور' : 'إظهار كلمة المرور'}
+                  aria-pressed={visible}
                   className="text-ink-2 hover:text-ink absolute inset-e-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full"
                 >
-                  <Eye className="size-4" aria-hidden="true" />
+                  {visible ? (
+                    <EyeOff className="size-4" aria-hidden="true" />
+                  ) : (
+                    <Eye className="size-4" aria-hidden="true" />
+                  )}
                 </button>
               </div>
             </div>
@@ -78,9 +117,10 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="bg-urgent rounded-field shadow-urgent w-full py-2.5 font-semibold text-white hover:brightness-110 lg:py-3"
+              disabled={submitting}
+              className="bg-urgent rounded-field shadow-urgent w-full py-2.5 font-semibold text-white hover:brightness-110 disabled:opacity-70 disabled:hover:brightness-100 lg:py-3"
             >
-              دخول
+              {submitting ? 'جاري تسجيل الدخول...' : 'دخول'}
             </button>
 
             <hr className="border-line-2 my-4" />
