@@ -14,32 +14,32 @@ export default function LoginPage() {
         <Breadcrumb items={[{ label: 'الرئيسية', to: '/' }, { label: 'تسجيل الدخول' }]} />
       </div>
 
-      <div className="mx-auto max-w-[460px] px-4 py-8">
+      <div className="mx-auto max-w-115 px-4 py-8 lg:grid lg:min-h-[70vh] lg:max-w-130 lg:content-center">
         <form
           onSubmit={handleSubmit}
           noValidate
           className="bg-surface border-line rounded-card shadow-card border"
         >
-          <div className="border-line-2 border-b px-[18px] py-3.5">
-            <h1 className="flex items-center gap-2.5 text-[1.15rem] font-extrabold">
-              <span aria-hidden="true" className="bg-gold inline-block h-[18px] w-1 rounded" />
+          <div className="border-line-2 border-b px-4.5 py-3.5 lg:px-6 lg:py-4">
+            <h1 className="flex items-center gap-2.5 text-[1.15rem] font-extrabold lg:text-[1.35rem]">
+              <span aria-hidden="true" className="bg-gold inline-block h-4.5 w-1 rounded" />
               تسجيل الدخول
             </h1>
           </div>
 
-          <div className="p-[18px]">
+          <div className="p-4.5 lg:p-6">
             <div className="mb-3.5">
-              <label htmlFor="email" className="mb-1 block text-[0.86rem] font-semibold">
-                البريد الإلكتروني
+              <label htmlFor="identifier" className="mb-1 block text-[0.86rem] font-semibold">
+                البريد الإلكتروني أو رقم الهاتف
               </label>
               <input
-                id="email"
-                name="email"
-                type="email"
+                id="identifier"
+                name="identifier"
+                type="text"
                 dir="ltr"
                 autoComplete="username"
-                placeholder="name@example.com"
-                className="rounded-field border-line bg-surface-2 focus:border-navy focus:bg-surface w-full border px-3 py-2.5"
+                placeholder="010 1234 5678"
+                className="rounded-field border-line bg-surface-2 focus:border-navy focus:bg-surface w-full border px-3 py-2.5 lg:py-3"
               />
             </div>
 
@@ -54,12 +54,12 @@ export default function LoginPage() {
                   type="password"
                   dir="ltr"
                   autoComplete="current-password"
-                  className="rounded-field border-line bg-surface-2 focus:border-navy focus:bg-surface w-full border py-2.5 ps-10 pe-3"
+                  className="rounded-field border-line bg-surface-2 focus:border-navy focus:bg-surface w-full border py-2.5 ps-10 pe-3 lg:py-3"
                 />
                 <button
                   type="button"
                   aria-label="إظهار كلمة المرور"
-                  className="text-ink-2 hover:text-ink absolute end-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full"
+                  className="text-ink-2 hover:text-ink absolute inset-e-2 top-1/2 grid size-8 -translate-y-1/2 place-items-center rounded-full"
                 >
                   <Eye className="size-4" aria-hidden="true" />
                 </button>
@@ -78,7 +78,7 @@ export default function LoginPage() {
 
             <button
               type="submit"
-              className="bg-urgent rounded-field shadow-urgent w-full py-2.5 font-semibold text-white hover:brightness-110"
+              className="bg-urgent rounded-field shadow-urgent w-full py-2.5 font-semibold text-white hover:brightness-110 lg:py-3"
             >
               دخول
             </button>
@@ -86,7 +86,7 @@ export default function LoginPage() {
             <hr className="border-line-2 my-4" />
 
             <p className="text-small text-center">
-              ليس لديك حساب؟
+              ليس لديك حساب؟{' '}
               <Link to="/signup" className="text-info font-semibold hover:underline">
                 أنشئ حساباً جديداً
               </Link>
@@ -95,8 +95,8 @@ export default function LoginPage() {
         </form>
 
         <p className="text-tiny text-ink-3 mt-3 text-center">
-          موظف في مستشفى شريك؟ ادخل بنفس الصفحة بحساب المستشفى.
-          <Link to="/hospital/join" className="text-info hover:underline">
+          موظف في مستشفى شريك؟ ادخل بنفس الصفحة بحساب المستشفى.{' '}
+          <Link to="/hospital/join" className="text-info whitespace-nowrap hover:underline">
             طلب شراكة
           </Link>
         </p>
