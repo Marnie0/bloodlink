@@ -1,3 +1,4 @@
+import { adminClasses as ui, toneClasses as tones } from './adminClasses';
 import { Link } from 'react-router-dom';
 import {
   ArrowLeft,
@@ -76,25 +77,25 @@ export default function AdminDashboardPage() {
   const pendingPapers = data.papers.filter((item) => item.status === 'pending');
   return (
     <>
-      <div className="bl-admin-section-heading">
+      <div className={ui.sectionHeading}>
         <div>
           <h2>أهلًا خالد، يوم جديد وفرصة للمساعدة</h2>
           <p>إليك ملخص المنصة وما يحتاج إلى متابعتك.</p>
         </div>
         <Badge tone="neutral">إحصائيات توضيحية</Badge>
       </div>
-      <div className="bl-admin-stats">
+      <div className={ui.stats}>
         {stats.map((stat) => {
           const Icon = stat.icon;
           return (
-            <section className="bl-admin-stat" key={stat.title}>
-              <div className="bl-admin-stat-top">
+            <section className={ui.stat} key={stat.title}>
+              <div className={ui.statTop}>
                 <span>{stat.title}</span>
-                <span className={`bl-admin-icon-tile bl-admin-${stat.tone}`}>
+                <span className={`${ui.iconTile} ${tones[stat.tone]}`}>
                   <Icon size={21} />
                 </span>
               </div>
-              <div className="bl-admin-stat-value">
+              <div className={ui.statValue}>
                 {stat.value}
                 <small>{stat.unit}</small>
               </div>
@@ -103,24 +104,24 @@ export default function AdminDashboardPage() {
           );
         })}
       </div>
-      <h2 className="bl-admin-section-title">
+      <h2 className={ui.sectionTitle}>
         يحتاج إلى اهتمامك
         <span />
       </h2>
-      <div className="bl-admin-queue-grid">
+      <div className={ui.queueGrid}>
         {queues.map((queue) => {
           const Icon = queue.icon;
           return (
-            <Link className="bl-admin-queue" key={queue.to} to={queue.to}>
-              <div className="bl-admin-queue-top">
-                <span className={`bl-admin-icon-tile bl-admin-${queue.tone}`}>
+            <Link className={ui.queue} key={queue.to} to={queue.to}>
+              <div className={ui.queueTop}>
+                <span className={`${ui.iconTile} ${tones[queue.tone]}`}>
                   <Icon size={22} />
                 </span>
                 <strong>{formatNumber(queue.count)}</strong>
               </div>
               <h3>{queue.title}</h3>
               <p>{queue.text}</p>
-              <span className="bl-admin-queue-link">
+              <span className={ui.queueLink}>
                 فتح قائمة المراجعة
                 <ArrowLeft size={17} />
               </span>
@@ -128,21 +129,21 @@ export default function AdminDashboardPage() {
           );
         })}
       </div>
-      <div className="bl-admin-dashboard-grid">
+      <div className={ui.dashboardGrid}>
         <Panel
           title="أحدث الأوراق المعلّقة"
           aside={
-            <Link className="bl-admin-text-link" to="/admin/papers">
+            <Link className={ui.textLink} to="/admin/papers">
               عرض الكل
               <ArrowLeft size={15} />
             </Link>
           }
         >
           {pendingPapers.length ? (
-            <div className="bl-admin-pending-list">
+            <div className={ui.pendingList}>
               {pendingPapers.slice(0, 3).map((item) => (
-                <Link key={item.id} className="bl-admin-pending-item" to={`/admin/papers?review=${item.id}`}>
-                  <span className="bl-admin-file-icon">
+                <Link key={item.id} className={ui.pendingItem} to={`/admin/papers?review=${item.id}`}>
+                  <span className={ui.fileIcon}>
                     <FileCheck2 size={22} />
                   </span>
                   <div>
@@ -150,9 +151,9 @@ export default function AdminDashboardPage() {
                     <small>
                       {item.type} · {item.hospital}
                     </small>
-                    <span className="bl-admin-ref">{item.id}</span>
+                    <span className={ui.ref}>{item.id}</span>
                   </div>
-                  <span className="bl-admin-pending-end">
+                  <span className={ui.pendingEnd}>
                     <Badge tone={item.urgent ? 'danger' : 'warn'}>
                       {item.urgent ? 'عاجل' : 'مراجعة يدوية'}
                     </Badge>
@@ -165,11 +166,11 @@ export default function AdminDashboardPage() {
             <EmptyState title="انتهيت من مراجعة الأوراق" text="لا توجد أوراق معلّقة في النسخة التجريبية." />
           )}
         </Panel>
-        <Panel title="آخر إجراءات الإدارة" aside={<span className="bl-admin-small">سجل محلي</span>}>
-          <ol className="bl-admin-timeline">
+        <Panel title="آخر إجراءات الإدارة" aside={<span className={ui.small}>سجل محلي</span>}>
+          <ol className={ui.timeline}>
             {data.activities.slice(0, 4).map((item) => (
               <li key={item.id}>
-                <span className={`bl-admin-timeline-dot bl-admin-${item.tone}`} />
+                <span className={`${ui.timelineDot} ${tones[item.tone]}`} />
                 <div>
                   <p>{item.text}</p>
                   <time dateTime={item.date}>{formatDate(item.date, true)}</time>
@@ -179,7 +180,7 @@ export default function AdminDashboardPage() {
           </ol>
         </Panel>
       </div>
-      <div className="bl-admin-guidance">
+      <div className={ui.guidance}>
         <ShieldCheck size={29} />
         <div>
           <h3>مراجعة دقيقة، ومجتمع أكثر أمانًا</h3>
@@ -188,7 +189,7 @@ export default function AdminDashboardPage() {
             الشريك.
           </p>
         </div>
-        <Link to="/admin/papers" className="bl-admin-btn bl-admin-btn-outline bl-admin-btn-small">
+        <Link to="/admin/papers" className={`${ui.btn} ${ui.btnOutline} ${ui.btnSmall}`}>
           مراجعة الأوراق
           <ArrowLeft size={15} />
         </Link>

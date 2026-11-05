@@ -1,19 +1,20 @@
+import { adminClasses as ui, toneClasses as tones } from './adminClasses';
 import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, Check, ChevronLeft, ChevronRight, FileSearch, Search, X } from 'lucide-react';
 import { formatDate, formatNumber, statusLabels, statusTones } from './adminData';
 
 export function Badge({ status, tone, children }) {
   return (
-    <span className={`bl-admin-badge bl-admin-${tone || statusTones[status] || 'neutral'}`}>
-      <span className="bl-admin-dot" />
+    <span className={`${ui.badge} ${tones[tone || statusTones[status] || 'neutral']}`}>
+      <span className={ui.dot} />
       {children || statusLabels[status]}
     </span>
   );
 }
 export function Panel({ title, aside, children, className = '' }) {
   return (
-    <section className={`bl-admin-panel ${className}`}>
-      <div className="bl-admin-panel-head">
+    <section className={`${ui.panel} ${className}`}>
+      <div className={ui.panelHead}>
         <h2>{title}</h2>
         {aside}
       </div>
@@ -23,7 +24,7 @@ export function Panel({ title, aside, children, className = '' }) {
 }
 export function EmptyState({ title = 'لا توجد نتائج', text = 'جرّب كلمة بحث أخرى أو غيّر التصفية.' }) {
   return (
-    <div className="bl-admin-empty">
+    <div className={ui.empty}>
       <FileSearch size={32} />
       <h3>{title}</h3>
       <p>{text}</p>
@@ -32,8 +33,8 @@ export function EmptyState({ title = 'لا توجد نتائج', text = 'جرّ�
 }
 export function Filters({ query, onQuery, placeholder, status, onStatus, options, children }) {
   return (
-    <div className="bl-admin-filters">
-      <label className="bl-admin-search">
+    <div className={ui.filters}>
+      <label className={ui.search}>
         <Search size={18} />
         <input
           type="search"
@@ -44,8 +45,8 @@ export function Filters({ query, onQuery, placeholder, status, onStatus, options
         />
       </label>
       {options && (
-        <label className="bl-admin-select-label">
-          <span className="bl-admin-sr">تصفية حسب الحالة</span>
+        <label className={ui.selectLabel}>
+          <span className={ui.sr}>تصفية حسب الحالة</span>
           <select value={status} onChange={(event) => onStatus(event.target.value)}>
             {options.map(([value, label]) => (
               <option key={value} value={value}>
@@ -65,10 +66,10 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
   const start = (current - 1) * pageSize;
   return (
     <>
-      <div className="bl-admin-table-wrap">
-        <table className="bl-admin-table">
-          <caption className="bl-admin-sr">{caption}</caption>
-          <thead>
+      <div className={ui.tableWrap}>
+        <table className={ui.table}>
+          <caption className={ui.sr}>{caption}</caption>
+          <thead className={ui.tableHead}>
             <tr>
               {columns.map((column) => (
                 <th key={column.label} scope="col">
@@ -77,11 +78,11 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
               ))}
             </tr>
           </thead>
-          <tbody>
+          <tbody className={ui.tableBody}>
             {rows.slice(start, start + pageSize).map((row) => (
               <tr
                 key={row.id}
-                className={onRowClick ? 'bl-admin-clickable-row' : undefined}
+                className={`${ui.tableRow} ${onRowClick ? ui.clickableRow : ''}`}
                 onClick={
                   onRowClick
                     ? (event) => {
@@ -96,8 +97,11 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
                 }
               >
                 {columns.map((column) => (
-                  <td key={column.label} data-label={column.label}>
-                    {column.render(row)}
+                  <td key={column.label} className={ui.tableCell}>
+                    <span className={ui.tableLabel} aria-hidden="true">
+                      {column.label}
+                    </span>
+                    <div className="min-w-0">{column.render(row)}</div>
                   </td>
                 ))}
               </tr>
@@ -106,7 +110,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
         </table>
         {!rows.length && <EmptyState />}
       </div>
-      <div className="bl-admin-pagination">
+      <div className={ui.pagination}>
         <span>
           {rows.length
             ? `عرض ${formatNumber(start + 1)}–${formatNumber(Math.min(start + pageSize, rows.length))} من ${formatNumber(rows.length)} سجل`
@@ -114,7 +118,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
         </span>
         <div>
           <button
-            className="bl-admin-page-btn"
+            className={ui.pageBtn}
             aria-label="الصفحة السابقة"
             disabled={current === 1}
             onClick={() => onPage(current - 1)}
@@ -123,7 +127,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
           </button>
           {Array.from({ length: pages }, (_, index) => (
             <button
-              className="bl-admin-page-btn"
+              className={ui.pageBtn}
               key={index}
               aria-label={`صفحة ${index + 1}`}
               aria-current={current === index + 1 ? 'page' : undefined}
@@ -133,7 +137,7 @@ export function DataTable({ rows, columns, caption, page, onPage, pageSize = 5, 
             </button>
           ))}
           <button
-            className="bl-admin-page-btn"
+            className={ui.pageBtn}
             aria-label="الصفحة التالية"
             disabled={current === pages}
             onClick={() => onPage(current + 1)}
@@ -150,20 +154,20 @@ export function Modal({ title, subtitle, children, onClose, wide = false }) {
   const heading = useRef(null);
   useEffect(() => {
     const element = dialog.current;
-    const previousOverflow = document.body.style.overflow;
+    const wasScrollLocked = document.body.classList.contains('overflow-hidden');
     element.showModal();
     // Start at the title so opening with a mouse does not highlight the close button.
     heading.current.focus({ preventScroll: true });
-    document.body.style.overflow = 'hidden';
+    document.body.classList.add('overflow-hidden');
     return () => {
       element.close();
-      document.body.style.overflow = previousOverflow;
+      if (!wasScrollLocked) document.body.classList.remove('overflow-hidden');
     };
   }, []);
   return (
     <dialog
       ref={dialog}
-      className={`bl-admin-modal ${wide ? 'bl-admin-modal-wide' : ''}`}
+      className={`${ui.modal} ${wide ? ui.modalWide : ui.modalWidth}`}
       aria-labelledby="bl-admin-dialog-title"
       onCancel={onClose}
       onClick={(event) => {
@@ -179,18 +183,18 @@ export function Modal({ title, subtitle, children, onClose, wide = false }) {
         }
       }}
     >
-      <div className="bl-admin-modal-head">
+      <div className={ui.modalHead}>
         <div>
           <h2 ref={heading} tabIndex={-1} id="bl-admin-dialog-title">
             {title}
           </h2>
           {subtitle && <p>{subtitle}</p>}
         </div>
-        <button type="button" className="bl-admin-icon-btn" aria-label="إغلاق" onClick={onClose}>
+        <button type="button" className={ui.iconBtn} aria-label="إغلاق" onClick={onClose}>
           <X size={20} />
         </button>
       </div>
-      <div className="bl-admin-modal-body">{children}</div>
+      <div className={ui.modalBody}>{children}</div>
     </dialog>
   );
 }
@@ -206,19 +210,16 @@ export function DecisionForm({
   const selected = options.find((option) => option.value === action);
   return (
     <form
-      className="bl-admin-decision"
+      className={ui.decision}
       onSubmit={(event) => {
         event.preventDefault();
         if (note.trim().length >= 5) onSubmit(action, note.trim());
       }}
     >
       <h3>قرار المراجعة</h3>
-      <div className="bl-admin-decisions">
+      <div className={ui.decisions}>
         {options.map((option) => (
-          <label
-            className={`bl-admin-choice ${action === option.value ? 'bl-admin-selected' : ''}`}
-            key={option.value}
-          >
+          <label className={`${ui.choice} ${action === option.value ? ui.selected : ''}`} key={option.value}>
             <input
               type="radio"
               name="decision"
@@ -230,8 +231,8 @@ export function DecisionForm({
           </label>
         ))}
       </div>
-      <label className="bl-admin-field">
-        {noteLabel} <span className="bl-admin-required">*</span>
+      <label className={ui.field}>
+        {noteLabel} <span className={ui.required}>*</span>
         <textarea
           required
           minLength={5}
@@ -243,19 +244,19 @@ export function DecisionForm({
           aria-describedby="bl-admin-note-hint"
         />
       </label>
-      <p id="bl-admin-note-hint" className="bl-admin-hint">
+      <p id="bl-admin-note-hint" className={ui.hint}>
         {noteHint} خمسة أحرف على الأقل.
       </p>
-      <div className="bl-admin-actions">
+      <div className={ui.actions}>
         <button
           type="submit"
-          className={`bl-admin-btn ${['banned', 'rejected'].includes(action) ? 'bl-admin-btn-danger' : 'bl-admin-btn-primary'}`}
+          className={`${ui.btn} ${['banned', 'rejected'].includes(action) ? ui.btnDanger : ui.btnPrimary}`}
           disabled={note.trim().length < 5}
         >
           <Check size={17} />
           {selected.confirm || 'تأكيد القرار'}
         </button>
-        <button type="button" className="bl-admin-btn bl-admin-btn-outline" onClick={onCancel}>
+        <button type="button" className={`${ui.btn} ${ui.btnOutline}`} onClick={onCancel}>
           إلغاء
         </button>
       </div>
@@ -264,7 +265,7 @@ export function DecisionForm({
 }
 export function Details({ items }) {
   return (
-    <dl className="bl-admin-details">
+    <dl className={ui.details}>
       {items.map(([label, value]) => (
         <div key={label}>
           <dt>{label}</dt>
@@ -276,7 +277,7 @@ export function Details({ items }) {
 }
 export function ReviewNote({ item }) {
   return (
-    <div className="bl-admin-review-note">
+    <div className={ui.reviewNote}>
       <Badge status={item.status} />
       <p>{item.note || 'تمت مراجعة هذا الطلب.'}</p>
       {item.reviewedAt && <small>تاريخ القرار: {formatDate(item.reviewedAt, true)}</small>}
@@ -285,18 +286,18 @@ export function ReviewNote({ item }) {
 }
 export function SampleDocument({ item, hospital = false }) {
   return (
-    <div className="bl-admin-document-area">
-      <div className="bl-admin-document-label">
+    <div className={ui.documentArea}>
+      <div className={ui.documentLabel}>
         <span>معاينة المستند</span>
         <Badge tone="neutral">نموذج تجريبي</Badge>
       </div>
-      <article className="bl-admin-document" aria-label="نموذج مستند تجريبي">
-        <div className="bl-admin-document-watermark">عينة تجريبية</div>
-        <div className="bl-admin-document-brand">
+      <article className={ui.document} aria-label="نموذج مستند تجريبي">
+        <div className={ui.documentWatermark}>عينة تجريبية</div>
+        <div className={ui.documentBrand}>
           {hospital ? item.name : item.hospital}
           <small>{item.area}</small>
         </div>
-        <div className="bl-admin-document-rule" />
+        <div className={ui.documentRule} />
         <h3>
           {hospital
             ? 'طلب انضمام مستشفى شريك'
@@ -322,21 +323,19 @@ export function SampleDocument({ item, hospital = false }) {
                 ]
           }
         />
-        <div className="bl-admin-document-sign">
+        <div className={ui.documentSign}>
           <span>
             توقيع المسؤول
             <br />
             <i>ــــــــــــــــــــ</i>
           </span>
-          <span className="bl-admin-stamp">
+          <span className={ui.stamp}>
             نموذج
             <br />
             غير رسمي
           </span>
         </div>
-        <p className="bl-admin-document-foot">
-          مستند توضيحي للواجهة فقط · ليس مستندًا طبيًا أو ترخيصًا حقيقيًا
-        </p>
+        <p className={ui.documentFoot}>مستند توضيحي للواجهة فقط · ليس مستندًا طبيًا أو ترخيصًا حقيقيًا</p>
       </article>
     </div>
   );
@@ -345,7 +344,7 @@ export function ReviewButton({ onClick, children = 'مراجعة' }) {
   return (
     <button
       type="button"
-      className="bl-admin-btn bl-admin-btn-outline bl-admin-btn-small"
+      className={`${ui.btn} ${ui.btnOutline} ${ui.btnSmall}`}
       aria-haspopup="dialog"
       onClick={(event) => {
         event.currentTarget.focus({ preventScroll: true });
