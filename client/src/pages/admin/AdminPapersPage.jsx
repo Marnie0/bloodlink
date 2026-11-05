@@ -1,3 +1,4 @@
+import { adminClasses as ui } from './adminClasses';
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Info } from 'lucide-react';
@@ -37,7 +38,7 @@ export default function AdminPapersPage() {
       render: (item) => (
         <>
           <b>{item.name}</b>
-          <span className="bl-admin-ref">{item.id}</span>
+          <span className={ui.ref}>{item.id}</span>
         </>
       ),
     },
@@ -50,12 +51,12 @@ export default function AdminPapersPage() {
         </>
       ),
     },
-    { label: 'الفصيلة', render: (item) => <span className="bl-admin-blood">{item.blood}</span> },
+    { label: 'الفصيلة', render: (item) => <span className={ui.blood}>{item.blood}</span> },
     {
       label: 'سبب المراجعة',
       render: (item) => (
         <>
-          <span className="bl-admin-table-issue">{item.issue}</span>
+          <span className={ui.tableIssue}>{item.issue}</span>
           {item.urgent && <Badge tone="danger">عاجل</Badge>}
         </>
       ),
@@ -72,7 +73,7 @@ export default function AdminPapersPage() {
   ];
   return (
     <>
-      <div className="bl-admin-inline-notice">
+      <div className={ui.inlineNotice}>
         <Info size={20} />
         <p>
           الأوراق هنا تحتاج إلى مراجعة بشرية. القبول يمنح علامة <b>«ورقة تبدو سليمة»</b>، ولا يُعد تأكيدًا من
@@ -106,8 +107,8 @@ export default function AdminPapersPage() {
             ['rejected', 'المرفوضة'],
           ]}
         >
-          <label className="bl-admin-select-label">
-            <span className="bl-admin-sr">نوع المستند</span>
+          <label className={ui.selectLabel}>
+            <span className={ui.sr}>نوع المستند</span>
             <select
               value={type}
               onChange={(event) => {
@@ -130,15 +131,15 @@ export default function AdminPapersPage() {
           onRowClick={(item) => setParams({ review: item.id })}
         />
       </Panel>
-      <p className="bl-admin-bottom-hint">
+      <p className={ui.bottomHint}>
         المستندات مخصّصة للمراجعة الإدارية؛ بيانات هذه الواجهة ونماذج الأوراق تجريبية بالكامل.
       </p>
       {selected && (
         <Modal wide title="مراجعة الورقة" subtitle={selected.id} onClose={close}>
-          <div className="bl-admin-review-grid">
+          <div className={ui.reviewGrid}>
             <SampleDocument item={selected} />
             <div>
-              <div className="bl-admin-modal-section-title">
+              <div className={ui.modalSectionTitle}>
                 <h3>بيانات الطلب</h3>
                 <Badge status={selected.status} />
               </div>
@@ -150,7 +151,7 @@ export default function AdminPapersPage() {
                   ['تاريخ الإرسال', formatDate(selected.date)],
                 ]}
               />
-              <div className="bl-admin-inline-notice bl-admin-notice-warn">
+              <div className={`${ui.inlineNotice} ${ui.noticeWarn}`}>
                 <Info size={18} />
                 <p>{selected.issue}</p>
               </div>

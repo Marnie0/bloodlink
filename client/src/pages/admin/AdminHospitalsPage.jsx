@@ -1,3 +1,4 @@
+import { adminClasses as ui, toneClasses as tones } from './adminClasses';
 import { useState } from 'react';
 import { Building2, CheckCircle2, Clock3 } from 'lucide-react';
 import { useAdmin } from './AdminContext';
@@ -29,13 +30,13 @@ export default function AdminHospitalsPage() {
     {
       label: 'المستشفى',
       render: (item) => (
-        <div className="bl-admin-hospital-cell">
-          <span className="bl-admin-hospital-icon">
+        <div className={ui.hospitalCell}>
+          <span className={ui.hospitalIcon}>
             <Building2 size={21} />
           </span>
           <div>
             <b>{item.name}</b>
-            <span className="bl-admin-ref">{item.id}</span>
+            <span className={ui.ref}>{item.id}</span>
           </div>
         </div>
       ),
@@ -70,7 +71,7 @@ export default function AdminHospitalsPage() {
   ];
   return (
     <>
-      <div className="bl-admin-hospital-summary">
+      <div className={ui.hospitalSummary}>
         {[
           {
             icon: Clock3,
@@ -89,7 +90,7 @@ export default function AdminHospitalsPage() {
           const Icon = stat.icon;
           return (
             <div key={stat.label}>
-              <span className={`bl-admin-icon-tile bl-admin-${stat.tone}`}>
+              <span className={`${ui.iconTile} ${tones[stat.tone]}`}>
                 <Icon size={22} />
               </span>
               <span>
@@ -129,15 +130,15 @@ export default function AdminHospitalsPage() {
           onRowClick={(item) => setSelectedId(item.id)}
         />
       </Panel>
-      <p className="bl-admin-bottom-hint">
+      <p className={ui.bottomHint}>
         حساب المستشفى يظل غير نشط حتى الاعتماد. في هذه النسخة، يتغير وضع الطلب محليًا فقط.
       </p>
       {selected && (
         <Modal wide title="مراجعة طلب الشراكة" subtitle={selected.id} onClose={() => setSelectedId(null)}>
-          <div className="bl-admin-review-grid">
+          <div className={ui.reviewGrid}>
             <SampleDocument item={selected} hospital />
             <div>
-              <div className="bl-admin-modal-section-title">
+              <div className={ui.modalSectionTitle}>
                 <h3>بيانات المنشأة</h3>
                 <Badge status={selected.status} />
               </div>
