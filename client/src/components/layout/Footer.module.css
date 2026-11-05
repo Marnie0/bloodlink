@@ -203,3 +203,28 @@
     align-items: flex-start;
   }
 }
+
+/* High contrast: black background, white text (DevKit: html.hc .foot { background: #000 }).
+   :global keeps ".hc" as the real class on <html>, so the CSS module doesn't rename it. */
+:global(.hc) .siteFooter {
+  background: #000;
+  color: #fff;
+}
+
+:global(.hc) .disclaimer {
+  border-color: #fff;
+  background: #000;
+  color: #fff;
+}
+
+:global(.hc) .about p,
+:global(.hc) .link,
+:global(.hc) .unavailable,
+:global(.hc) .legal {
+  color: #fff;
+}
+
+:global(.hc) .comingSoon {
+  border-color: #fff;
+  color: #fff;
+}

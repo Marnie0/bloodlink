@@ -10,6 +10,9 @@ export default function Brand() {
       <span>
         <span className="font-head text-head block text-xl font-extrabold">رابط الحياة</span>
         <span className="text-tiny text-ink-2 sm:text-small block">خدمات رقمية لربط المرضى بمتبرعي الدم</span>
+        <span className="text-tiny text-gold-ink sm:text-small xs:block hidden">
+          BLOODLINK · DIGITAL SERVICES
+        </span>
       </span>
     </Link>
   );
