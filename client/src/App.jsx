@@ -23,7 +23,7 @@ import AdminDashboardPage from '@/pages/admin/AdminDashboardPage';
 import AdminPapersPage from '@/pages/admin/AdminPapersPage';
 import AdminReportsPage from '@/pages/admin/AdminReportsPage';
 import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
-
+import DonorLayout from '@/pages/donor/DonorLayout';
 export default function App() {
   const { pathname } = useLocation();
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');
@@ -38,7 +38,7 @@ export default function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="terms" element={<TermsPage />} />
 
-          <Route path="donor">
+          <Route path="donor" element={<DonorLayout />}>
             <Route path="requests" element={<DonorRequestsPage />} />
             <Route path="requests/:id" element={<RequestDetailsPage />} />
             <Route path="certificate" element={<CertificatePage />} />
