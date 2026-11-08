@@ -1,13 +1,16 @@
 import Brand from './Brand';
 import MainNav from './MainNav';
+import UserMenu from './UserMenu';
 import { Link } from 'react-router-dom';
 import { Bell, LogIn, Search } from 'lucide-react';
+import { useAuth } from '@/context/AuthContext';
 
 function handleSearch(e) {
   e.preventDefault();
 }
 
 export default function Header() {
+  const { user } = useAuth();
   return (
     <header className="border-line bg-surface border-b">
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
@@ -39,10 +42,14 @@ export default function Header() {
           >
             <Bell />
           </button>
-          <Link to="/login" className="btn btn-secondary btn-circle md:w-auto md:rounded-full md:px-5">
-            <LogIn className="size-5 md:hidden" />
-            <span className="sr-only md:not-sr-only">تسجيل الدخول</span>
-          </Link>
+          {user ? (
+            <UserMenu />
+          ) : (
+            <Link to="/login" className="btn btn-secondary btn-circle md:w-auto md:rounded-full md:px-5">
+              <LogIn className="size-5 md:hidden" />
+              <span className="sr-only md:not-sr-only">تسجيل الدخول</span>
+            </Link>
+          )}
         </div>
       </div>
       <MainNav />

@@ -2,10 +2,11 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Notice from '@/components/ui/Notice';
-import { login } from '@/pages/auth/auth';
+import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
 
 export default function LoginPage() {
+  const { login } = useAuth();
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [visible, setVisible] = useState(false);
@@ -16,6 +17,7 @@ export default function LoginPage() {
     const data = new FormData(e.currentTarget);
     const identifier = data.get('identifier');
     const password = data.get('password');
+    const remember = data.get('remember') === 'on';
 
     if (!identifier.trim() || !password.trim()) {
       setError('الرجاء إدخال البريد الإلكتروني أو رقم الهاتف وكلمة المرور.');
@@ -25,7 +27,7 @@ export default function LoginPage() {
     setSubmitting(true);
     setError('');
     try {
-      await login({ identifier, password });
+      await login({ identifier, password, remember });
       navigate('/', { replace: true });
     } catch (err) {
       setError(err.message || 'حدث خطأ أثناء تسجيل الدخول. الرجاء المحاولة لاحقاً.');

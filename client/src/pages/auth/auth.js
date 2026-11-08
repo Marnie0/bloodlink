@@ -1,6 +1,10 @@
-import { users } from '@/mocks/users';
+const API_URL = import.meta.env.VITE_API_URL;
 
-const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+const MESSAGES = {
+  wrong: 'البريد الإلكتروني أو رقم الهاتف أو كلمة المرور غير صحيحة. الرجاء المحاولة مرة أخرى.',
+  network: 'حدث خطأ أثناء الاتصال بالخادم. الرجاء التحقق من اتصالك بالإنترنت.',
+  other: 'حدث خطأ أثناء تسجيل الدخول. الرجاء المحاولة لاحقاً.',
+};
 
 function fail(status, message) {
   const error = new Error(message);
@@ -8,32 +12,38 @@ function fail(status, message) {
   throw error;
 }
 
-export async function login({ identifier, password }) {
-  await wait(800);
-
+export async function loginRequest({ identifier, password }) {
+  if (!API_URL) {
+    throw new Error('VITE_API_URL is missing: create client/.env.local (see .env.example)');
+  }
   const value = identifier.trim();
   const isEmail = value.includes('@');
   const cleaned = isEmail ? value.toLowerCase() : value.replace(/[\s-]/g, '');
 
-  const user = users.find((u) => (isEmail ? u.email : u.phone) === cleaned && u.password === password);
-
-  if (!user) {
-    fail(401, 'البريد الإلكتروني أو رقم الهاتف أو كلمة المرور غير صحيحة.');
+  let response;
+  try {
+    response = await fetch(`${API_URL}/auth/login`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email: cleaned, password }),
+    });
+  } catch {
+    fail(0, MESSAGES.network);
   }
 
-  if (user.status === 'pending') {
-    fail(403, 'حسابك قيد المراجعة من قبل الإدارة.');
+  const data = await response.json().catch(() => ({}));
+
+  if (!response.ok) {
+    fail(response.status, response.status === 401 ? MESSAGES.wrong : MESSAGES.other);
   }
 
-  if (user.status === 'banned') {
-    fail(403, 'تم حظر حسابك من قبل الإدارة.');
-  }
+  const user = data.user ?? data;
 
   return {
     id: user.id,
-    name: user.name,
-    email: user.email,
-    phone: user.phone,
-    roles: user.roles,
+    name: user.name ?? cleaned,
+    email: user.email ?? cleaned,
+    phone: user.phone ?? '',
+    roles: user.roles ?? ['donor'],
   };
 }
