@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { AuthContext } from '@/context/AuthContext';
-import { loginRequest } from '@/pages/auth/auth';
+import { loginRequest, signupRequest } from '@/pages/auth/auth';
 
 const STORAGE_KEY = 'bl-user';
 
@@ -9,6 +9,13 @@ export default function AuthProvider({ children }) {
     const saved = localStorage.getItem(STORAGE_KEY) ?? sessionStorage.getItem(STORAGE_KEY);
     return saved ? JSON.parse(saved) : null;
   });
+
+  async function register({ name, email, password }) {
+    const newUser = await signupRequest({ name, email, password });
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(newUser));
+    setUser(newUser);
+    return newUser;
+  }
 
   async function login({ identifier, password, remember }) {
     const loggedIn = await loginRequest({ identifier, password, remember });
@@ -24,5 +31,5 @@ export default function AuthProvider({ children }) {
     setUser(null);
   }
 
-  return <AuthContext value={{ user, login, logout }}>{children}</AuthContext>;
+  return <AuthContext value={{ user, login, logout, register }}>{children}</AuthContext>;
 }
