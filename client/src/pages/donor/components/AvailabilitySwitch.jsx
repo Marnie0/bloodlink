@@ -1,12 +1,8 @@
-import Ltr from "./Ltr";
-import { formatDate } from "../donorFormat";
-import { tagClass } from "../donorStyles";
+import Ltr from '@/components/ui/Ltr';
+import { formatDate } from '../donorFormat';
+import { tagClass } from '../donorStyles';
 
-export default function AvailabilitySwitch({
-  isAvailable,
-  eligibleFrom,
-  onToggle,
-}) {
+export default function AvailabilitySwitch({ isAvailable, eligibleFrom, onToggle }) {
   // هل عدّت فترة الراحة بعد آخر تبرع؟ (إرشاد بس، المستشفى هي اللي تقرر)
   const isEligibleNow = new Date(eligibleFrom) <= new Date();
 
@@ -26,17 +22,15 @@ export default function AvailabilitySwitch({
       <div className="mt-2.5 flex items-center justify-between gap-2.5">
         <span className="text-small">الحالة الطبية</span>
         {isEligibleNow ? (
-          <span className={tagClass("ok")}>مؤهل الآن</span>
+          <span className={tagClass('ok')}>مؤهل الآن</span>
         ) : (
-          <span className={tagClass("warn")}>
+          <span className={tagClass('warn')}>
             مؤهل من <Ltr>{formatDate(eligibleFrom)}</Ltr>
           </span>
         )}
       </div>
 
-      <p className="text-tiny text-ink-3 mt-2 mb-0">
-        القرار الطبي النهائي للمستشفى دائماً.
-      </p>
+      <p className="text-tiny text-ink-3 mt-2 mb-0">القرار الطبي النهائي للمستشفى دائماً.</p>
     </div>
   );
 }

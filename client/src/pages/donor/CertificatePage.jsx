@@ -3,12 +3,12 @@ import { useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import CertificateForm from './components/CertificateForm';
-import EmptyState from './components/EmptyState';
-import HeaderChip from './components/HeaderChip';
-import Ltr from './components/Ltr';
-import PageHeader from './components/PageHeader';
+import EmptyState from '@/components/ui/EmptyState';
+import HeaderChip from '@/components/ui/HeaderChip';
+import Ltr from '@/components/ui/Ltr';
+import PageHeader from '@/components/ui/PageHeader';
 import PaperCheckResult from './components/PaperCheckResult';
-import Panel from './components/Panel';
+import Panel from '@/components/ui/Panel';
 import SideMenu from './components/SideMenu';
 import { useDonor } from './DonorContext';
 

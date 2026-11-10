@@ -1,18 +1,18 @@
-import { NavLink } from "react-router-dom";
-import Panel from "./Panel";
+import { NavLink } from 'react-router-dom';
+import Panel from '@/components/ui/Panel';
 
 const menuItems = [
-  { label: "لوحة الحساب" },
-  { label: "الطلبات القريبة", link: "/donor/requests", showCount: true },
-  { label: "مواعيدي" },
-  { label: "سجل التبرعات", link: "/donor/history" },
-  { label: "شهادة فصيلة الدم", link: "/donor/certificate" },
-  { label: "المنطقة والإشعارات" },
-  { label: "إيقاف مؤقت" },
+  { label: 'لوحة الحساب' },
+  { label: 'الطلبات القريبة', link: '/donor/requests', showCount: true },
+  { label: 'مواعيدي' },
+  { label: 'سجل التبرعات', link: '/donor/history' },
+  { label: 'شهادة فصيلة الدم', link: '/donor/certificate' },
+  { label: 'المنطقة والإشعارات' },
+  { label: 'إيقاف مؤقت' },
 ];
 
 const itemClass =
-  "flex items-center justify-between rounded-[10px] px-3 py-[9px] text-[0.88rem] text-ink no-underline";
+  'flex items-center justify-between rounded-[10px] px-3 py-[9px] text-[0.88rem] text-ink no-underline';
 
 export default function SideMenu({ nearbyCount }) {
   return (
@@ -41,7 +41,7 @@ export default function SideMenu({ nearbyCount }) {
               to={item.link}
               end
               className={({ isActive }) =>
-                `${itemClass} ${isActive ? "bg-teal-lt text-teal-ink font-semibold" : "hover:bg-surface-2"}`
+                `${itemClass} ${isActive ? 'bg-teal-lt text-teal-ink font-semibold' : 'hover:bg-surface-2'}`
               }
             >
               {item.label}

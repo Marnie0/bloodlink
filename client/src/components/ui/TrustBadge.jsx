@@ -1,5 +1,5 @@
-import { tagClass } from '../donorStyles';
-import { TRUST_LABELS } from '../donorConstants';
+import { tagClass } from '@/pages/donor/donorStyles';
+import { TRUST_LABELS } from '@/pages/donor/donorConstants';
 import { Clock, FileCheck, ShieldCheck, TriangleAlert } from 'lucide-react';
 
 // علامة الثقة: موثّق / ورقة تبدو سليمة / بحاجة لمراجعة / بانتظار تأكيد المستشفى.

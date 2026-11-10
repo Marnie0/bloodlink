@@ -1,25 +1,25 @@
-import { Pause, Search } from "lucide-react";
-import { useState } from "react";
-import Breadcrumb from "@/components/ui/Breadcrumb";
-import DonorIdCard from "./components/DonorIdCard";
-import AvailabilitySwitch from "./components/AvailabilitySwitch";
-import EmptyState from "./components/EmptyState";
-import ErrorState from "./components/ErrorState";
-import FilterChips from "./components/FilterChips";
-import HeaderChip from "./components/HeaderChip";
-import LiveDot from "./components/LiveDot";
-import Ltr from "./components/Ltr";
-import Notice from "@/components/ui/Notice";
-import PageHeader from "./components/PageHeader";
-import Pager from "./components/Pager";
-import Panel from "./components/Panel";
-import RequestsTable from "./components/RequestsTable";
-import SideMenu from "./components/SideMenu";
-import TableSkeleton from "./components/TableSkeleton";
-import { useDonor } from "./DonorContext";
-import { CAN_DONATE_TO, FIRST_WAVE_KM, SECOND_WAVE_KM } from "./donorConstants";
-import { formatTime } from "./donorFormat";
-import { buttonClass, tagClass } from "./donorStyles";
+import { Pause, Search } from 'lucide-react';
+import { useState } from 'react';
+import Breadcrumb from '@/components/ui/Breadcrumb';
+import DonorIdCard from './components/DonorIdCard';
+import AvailabilitySwitch from './components/AvailabilitySwitch';
+import EmptyState from '@/components/ui/EmptyState';
+import ErrorState from '@/components/ui/ErrorState';
+import FilterChips from './components/FilterChips';
+import HeaderChip from '@/components/ui/HeaderChip';
+import LiveDot from '@/components/ui/LiveDot';
+import Ltr from '@/components/ui/Ltr';
+import Notice from '@/components/ui/Notice';
+import PageHeader from '@/components/ui/PageHeader';
+import Pager from '@/components/ui/Pager';
+import Panel from '@/components/ui/Panel';
+import RequestsTable from './components/RequestsTable';
+import SideMenu from './components/SideMenu';
+import TableSkeleton from '@/components/ui/TableSkeleton';
+import { useDonor } from './DonorContext';
+import { CAN_DONATE_TO, FIRST_WAVE_KM, SECOND_WAVE_KM } from './donorConstants';
+import { formatTime } from './donorFormat';
+import { buttonClass, tagClass } from './donorStyles';
 
 const PAGE_SIZE = 10;
 
@@ -56,7 +56,7 @@ export default function DonorRequestsPage() {
         actions={
           <button
             type="button"
-            className={buttonClass("primary", "sm")}
+            className={buttonClass('primary', 'sm')}
             onClick={() => toggleAvailability(true)}
           >
             تفعيل استقبال الطلبات
@@ -81,25 +81,22 @@ export default function DonorRequestsPage() {
         title="لا توجد طلبات تناسب فصيلتك قريباً منك الآن"
         actions={
           <>
-            <button type="button" className={buttonClass("line", "sm")}>
+            <button type="button" className={buttonClass('line', 'sm')}>
               تعديل المنطقة
             </button>
-            <button type="button" className={buttonClass("ghost", "sm")}>
+            <button type="button" className={buttonClass('ghost', 'sm')}>
               إعدادات الإشعارات
             </button>
           </>
         }
       >
-        سنرسل لك إشعاراً فور ظهور طلب متوافق ضمن <Ltr>{FIRST_WAVE_KM}</Ltr> كم،
-        ثم <Ltr>{SECOND_WAVE_KM}</Ltr> كم. لا تحتاج لفتح الصفحة.
+        سنرسل لك إشعاراً فور ظهور طلب متوافق ضمن <Ltr>{FIRST_WAVE_KM}</Ltr> كم، ثم <Ltr>{SECOND_WAVE_KM}</Ltr>{' '}
+        كم. لا تحتاج لفتح الصفحة.
       </EmptyState>
     );
   } else {
     // بنعرض طلبات الصفحة الحالية بس
-    const requestsOnThisPage = requests.slice(
-      (currentPage - 1) * PAGE_SIZE,
-      currentPage * PAGE_SIZE,
-    );
+    const requestsOnThisPage = requests.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
     boxContent = (
       <>
         <RequestsTable requests={requestsOnThisPage} />
@@ -113,8 +110,7 @@ export default function DonorRequestsPage() {
     );
   }
 
-  const showTable =
-    !isPaused && !requestsError && !requestsLoading && requests.length > 0;
+  const showTable = !isPaused && !requestsError && !requestsLoading && requests.length > 0;
   const showFilters = !isPaused && !requestsError && !requestsLoading;
 
   return (
@@ -122,9 +118,9 @@ export default function DonorRequestsPage() {
       <div className="mx-auto max-w-310 px-4 md:px-6">
         <Breadcrumb
           items={[
-            { label: "الرئيسية", to: "/" },
-            { label: "حسابي", to: "/donor/requests" },
-            { label: "الطلبات القريبة" },
+            { label: 'الرئيسية', to: '/' },
+            { label: 'حسابي', to: '/donor/requests' },
+            { label: 'الطلبات القريبة' },
           ]}
         />
         <PageHeader
@@ -132,8 +128,7 @@ export default function DonorRequestsPage() {
           subtitle={
             <>
               طلبات نشطة في مستشفيات ضمن <Ltr>{FIRST_WAVE_KM}</Ltr> كم من منطقتك
-              {donor && ` (${donor.area.name})`}، ثم <Ltr>{SECOND_WAVE_KM}</Ltr>{" "}
-              كم إذا لم يكفِ.
+              {donor && ` (${donor.area.name})`}، ثم <Ltr>{SECOND_WAVE_KM}</Ltr> كم إذا لم يكفِ.
             </>
           }
           chips={
@@ -172,15 +167,13 @@ export default function DonorRequestsPage() {
           <div>
             {donor && !isPaused && (
               <Notice tone="info" title="من يمكنه الاستفادة من تبرعك">
-                فصيلة <Ltr>{donor.bloodType}</Ltr> تناسب المرضى من فصائل{" "}
-                <Ltr>{CAN_DONATE_TO[donor.bloodType].join(" · ")}</Ltr>. نعرض لك
-                هذه الطلبات فقط.
+                فصيلة <Ltr>{donor.bloodType}</Ltr> تناسب المرضى من فصائل{' '}
+                <Ltr>{CAN_DONATE_TO[donor.bloodType].join(' · ')}</Ltr>. نعرض لك هذه الطلبات فقط.
               </Notice>
             )}
             {isPaused && (
               <Notice tone="warn" title="أنت متوقف مؤقتاً عن استقبال الطلبات">
-                لن تصلك إشعارات ولن تظهر لك طلبات جديدة. يمكنك التفعيل في أي وقت
-                من المفتاح بجانب بطاقتك.
+                لن تصلك إشعارات ولن تظهر لك طلبات جديدة. يمكنك التفعيل في أي وقت من المفتاح بجانب بطاقتك.
               </Notice>
             )}
 
@@ -189,7 +182,7 @@ export default function DonorRequestsPage() {
                 <>
                   الطلبات المتاحة
                   {showTable && (
-                    <span className={tagClass("grey")}>
+                    <span className={tagClass('grey')}>
                       <Ltr>{requests.length}</Ltr>
                     </span>
                   )}
@@ -198,9 +191,7 @@ export default function DonorRequestsPage() {
               meta={
                 showFilters &&
                 lastUpdate && (
-                  <span className="text-tiny text-ink-3">
-                    آخر تحديث: {formatTime(lastUpdate)}
-                  </span>
+                  <span className="text-tiny text-ink-3">آخر تحديث: {formatTime(lastUpdate)}</span>
                 )
               }
             >

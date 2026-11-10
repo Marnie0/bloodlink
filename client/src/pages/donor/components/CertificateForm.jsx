@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { ALLOWED_FILE_TYPES, MAX_UPLOAD_MB } from '../donorConstants';
 import { buttonClass } from '../donorStyles';
 import { Camera } from 'lucide-react';
-import Ltr from './Ltr';
+import Ltr from '@/components/ui/Ltr';
 
 const fieldClass =
   'h-auto w-full rounded-field border border-line bg-surface-2 px-3 py-2.5 text-ink focus:border-navy focus:bg-surface focus:outline-none disabled:opacity-60';

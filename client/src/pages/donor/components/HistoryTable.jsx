@@ -1,7 +1,7 @@
 import { formatDate } from '../donorFormat';
 import { tagClass } from '../donorStyles';
 import { ShieldCheck } from 'lucide-react';
-import Ltr from './Ltr';
+import Ltr from '@/components/ui/Ltr';
 
 // جدول سجل التبرعات (مكتوب بـ div). نفس فكرة جدول الطلبات: على الموبايل كل تبرع بيبقى كارت.
 const columnsWidth = 'md:grid-cols-[.85fr_1.5fr_1.2fr_1.6fr_.9fr]';
