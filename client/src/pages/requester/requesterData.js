@@ -80,3 +80,24 @@ export async function getRequestProgress(id) {
   }
   return request;
 }
+
+// فحص الورقة. للتجربة:
+//   اسم الملف فيه "unclear" -> الورقة غير واضحة
+//   اسم الملف فيه "down"    -> الفحص الآلي واقف، الورقة تروح للمراجعة
+//   غير كده: مستشفى شريكة -> بانتظار تأكيدها، وغير شريكة -> تبدو سليمة
+export async function checkPaper({ hospital, file }) {
+  await wait(1500);
+  const name = file.name.toLowerCase();
+  if (name.includes('down')) return { status: 'queued', problems: [] };
+  if (name.includes('unclear')) {
+    return { status: 'needs_review', problems: ['stamp_missing', 'date_unreadable'] };
+  }
+  return { status: hospital.isPartner ? 'pending_hospital' : 'looks_valid', problems: [] };
+}
+
+// إرسال الطلب. لما السيرفر يجهز هتاخد الـ draft وترجّع رقم الطلب الحقيقي.
+// دلوقتي بترجّع طلب من اللي في getRequestProgress علشان صفحة المتابعة تفتح.
+export async function submitRequest() {
+  await wait(900);
+  return { id: 'BL-2026-004220' };
+}
