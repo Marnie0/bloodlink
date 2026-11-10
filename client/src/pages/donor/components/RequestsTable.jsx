@@ -1,27 +1,17 @@
-import { Link } from "react-router-dom";
-import { getTimeLeft } from "../donorFormat";
-import { buttonClass, tagClass } from "../donorStyles";
-import BloodTypeChip from "./BloodTypeChip";
-import LiveDot from "./LiveDot";
-import Ltr from "./Ltr";
-import TrustBadge from "./TrustBadge";
+import { Link } from 'react-router-dom';
+import { getTimeLeft } from '../donorFormat';
+import { buttonClass, tagClass } from '../donorStyles';
+import BloodTypeChip from '@/components/ui/BloodTypeChip';
+import LiveDot from '@/components/ui/LiveDot';
+import Ltr from '@/components/ui/Ltr';
+import TrustBadge from '@/components/ui/TrustBadge';
 
 // عرض الأعمدة الـ 8 على الشاشة الكبيرة
-const columnsWidth =
-  "md:grid-cols-[1.4fr_.55fr_1.6fr_.65fr_.85fr_.95fr_.7fr_1fr]";
-const columnTitles = [
-  "الرقم المرجعي",
-  "الفصيلة",
-  "المستشفى",
-  "المسافة",
-  "الوحدات",
-  "الورقة",
-  "ينتهي",
-  "",
-];
+const columnsWidth = 'md:grid-cols-[1.4fr_.55fr_1.6fr_.65fr_.85fr_.95fr_.7fr_1fr]';
+const columnTitles = ['الرقم المرجعي', 'الفصيلة', 'المستشفى', 'المسافة', 'الوحدات', 'الورقة', 'ينتهي', ''];
 
 const cellClass =
-  "relative flex min-h-10 flex-col justify-center border-b border-line-2 py-[11px] pe-3 ps-[124px] before:absolute before:start-3 before:top-3 before:w-[104px] before:text-[0.76rem] before:leading-normal before:font-semibold before:text-ink-3 before:content-[attr(data-label)] md:min-h-0 md:ps-3 md:before:hidden";
+  'relative flex min-h-10 flex-col justify-center border-b border-line-2 py-[11px] pe-3 ps-[124px] before:absolute before:start-3 before:top-3 before:w-[104px] before:text-[0.76rem] before:leading-normal before:font-semibold before:text-ink-3 before:content-[attr(data-label)] md:min-h-0 md:ps-3 md:before:hidden';
 
 export default function RequestsTable({ requests }) {
   return (
@@ -32,11 +22,7 @@ export default function RequestsTable({ requests }) {
       >
         {columnTitles.map((title, index) => (
           <div key={index} className="px-3 py-2.5 text-start">
-            {index === columnTitles.length - 1 ? (
-              <span className="sr-only">الإجراء</span>
-            ) : (
-              title
-            )}
+            {index === columnTitles.length - 1 ? <span className="sr-only">الإجراء</span> : title}
           </div>
         ))}
       </div>
@@ -44,10 +30,9 @@ export default function RequestsTable({ requests }) {
       {/* صف لكل طلب */}
       <div className="max-md:p-3">
         {requests.map((request) => {
-          const isUrgent = request.urgency === "urgent";
+          const isUrgent = request.urgency === 'urgent';
           const timeLeft = getTimeLeft(request.expiresAt);
-          const pledgedPercent =
-            (request.unitsPledged / request.unitsNeeded) * 100;
+          const pledgedPercent = (request.unitsPledged / request.unitsNeeded) * 100;
 
           return (
             <div
@@ -61,7 +46,7 @@ export default function RequestsTable({ requests }) {
                 </div>
                 {isUrgent && (
                   <div className="mt-1">
-                    <span className={tagClass("err")}>
+                    <span className={tagClass('err')}>
                       <LiveDot />
                       عاجل
                     </span>
@@ -80,8 +65,7 @@ export default function RequestsTable({ requests }) {
                   <b>{request.hospital.name}</b>
                   <br />
                   <small className="text-ink-3">
-                    {request.hospital.area} ·{" "}
-                    {request.hospital.partner ? "شريك" : "غير شريك"}
+                    {request.hospital.area} · {request.hospital.partner ? 'شريك' : 'غير شريك'}
                   </small>
                 </div>
               </div>
@@ -123,7 +107,7 @@ export default function RequestsTable({ requests }) {
                 <div>
                   <Link
                     to={`/donor/requests/${request.id}`}
-                    className={buttonClass(isUrgent ? "primary" : "line", "sm")}
+                    className={buttonClass(isUrgent ? 'primary' : 'line', 'sm')}
                   >
                     عرض الطلب
                   </Link>
