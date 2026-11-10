@@ -1,20 +1,25 @@
-const Notice = ({ tone = 'info', title, children }) => {
-  const tones = {
-    info: { box: 'bg-info-lt border-info', icon: 'bg-info', glyph: 'i' },
-    ok: { box: 'bg-ok-lt border-ok', icon: 'bg-ok', glyph: '✓' },
-    warn: { box: 'bg-warn-lt border-warn', icon: 'bg-warn', glyph: '!' },
-    err: { box: 'bg-crimson-lt border-crimson', icon: 'bg-crimson', glyph: '×' },
-    gold: {
-      box: 'bg-[color-mix(in_srgb,var(--color-gold)_12%,var(--color-surface))] border-gold',
-      icon: 'bg-gold',
-      glyph: '!',
-    },
-  };
+const tones = {
+  info: { box: 'bg-info-lt border-info', icon: 'bg-info', glyph: 'i' },
+  ok: { box: 'bg-ok-lt border-ok', icon: 'bg-ok', glyph: '✓' },
+  warn: { box: 'bg-warn-lt border-warn', icon: 'bg-warn', glyph: '!' },
+  err: { box: 'bg-crimson-lt border-crimson', icon: 'bg-crimson', glyph: '×' },
+  gold: {
+    box: 'bg-[color-mix(in_srgb,var(--color-gold)_12%,var(--color-surface))] border-gold',
+    icon: 'bg-gold',
+    glyph: '!',
+  },
+};
 
+const Notice = ({ tone = 'info', title, live = false, small = false, className = 'mb-4', children }) => {
   const t = tones[tone];
+  const role = live ? (tone === 'err' ? 'alert' : 'status') : undefined;
+
   return (
     <div
-      className={`rounded-tile text-small hc:border-2 hc:border-s-[6px] mb-4 grid grid-cols-[auto_1fr] gap-3 border border-s-[5px] px-4 py-3.5 ${t.box}`}
+      role={role}
+      className={`rounded-tile hc:border-2 hc:border-s-[6px] grid grid-cols-[auto_1fr] gap-3 border border-s-[5px] px-4 py-3.5 ${
+        small ? 'text-[0.82rem]' : 'text-small'
+      } ${t.box} ${className}`}
     >
       <span
         aria-hidden
@@ -24,7 +29,7 @@ const Notice = ({ tone = 'info', title, children }) => {
       </span>
       <div className="min-w-0">
         {title && <b className="font-head text-ink mb-0.5 block text-[0.95rem] font-bold">{title}</b>}
-        <p className="m-0">{children}</p>
+        <div>{children}</div>
       </div>
     </div>
   );
