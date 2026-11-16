@@ -1,4 +1,4 @@
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Notice from '@/components/ui/Notice';
@@ -11,6 +11,7 @@ export default function LoginPage() {
   const [submitting, setSubmitting] = useState(false);
   const [visible, setVisible] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -28,7 +29,9 @@ export default function LoginPage() {
     setError('');
     try {
       await login({ identifier, password, remember });
-      navigate('/', { replace: true });
+      // ProtectedRoute saved the page they wanted before sending them here; go back to it
+      const from = location.state?.from;
+      navigate(from ? `${from.pathname}${from.search}${from.hash}` : '/', { replace: true });
     } catch (err) {
       setError(err.message || 'حدث خطأ أثناء تسجيل الدخول. الرجاء المحاولة لاحقاً.');
     } finally {
