@@ -1,6 +1,9 @@
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { Droplet, Hospital, Search, UserPlus } from 'lucide-react';
+import { partnerHospitals } from '@/lib/partnerHospitals';
 import { arNum } from './homeFormat';
-import { partnerHospitals, platformStats, requestsByType, urgentRequests } from './homeData';
+import { platformStats, requestsByType, urgentRequests } from './homeData';
 import HomeHero from './components/HomeHero';
 import HowItWorks from './components/HowItWorks';
 import PageFeedback from './components/PageFeedback';
@@ -19,6 +22,17 @@ function focusLookup(event) {
 }
 
 export default function HomePage() {
+  const { hash } = useLocation();
+
+  // Links like "/#partners" or "/#ref" (from the header search): scroll to that part,
+  // and put the cursor in it if it's a field
+  useEffect(() => {
+    if (!hash) return;
+    const target = document.getElementById(hash.slice(1));
+    if (target instanceof HTMLInputElement) target.focus();
+    else target?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [hash]);
+
   return (
     <>
       <HomeHero

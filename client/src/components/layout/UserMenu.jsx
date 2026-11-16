@@ -1,6 +1,7 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import { LogOut } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
+import { useDismiss } from '@/lib/useDismiss';
 
 const ROLE_LABELS = {
   donor: 'متبرع',
@@ -24,27 +25,8 @@ export default function UserMenu() {
   const wrapperRef = useRef(null);
   const buttonRef = useRef(null);
 
-  // While the menu is open: close it on a click outside, or on Escape
-  useEffect(() => {
-    if (!open) return;
-
-    function handleClick(e) {
-      if (!wrapperRef.current.contains(e.target)) setOpen(false);
-    }
-    function handleKey(e) {
-      if (e.key === 'Escape') {
-        setOpen(false);
-        buttonRef.current.focus();
-      }
-    }
-
-    document.addEventListener('mousedown', handleClick);
-    document.addEventListener('keydown', handleKey);
-    return () => {
-      document.removeEventListener('mousedown', handleClick);
-      document.removeEventListener('keydown', handleKey);
-    };
-  }, [open]);
+  const close = useCallback(() => setOpen(false), []);
+  useDismiss(open, close, wrapperRef, buttonRef);
 
   const roles = user.roles.map((role) => ROLE_LABELS[role] ?? role).join(' · ');
 

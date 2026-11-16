@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useLocation, useNavigate } from 'react-router-dom';
 import { Eye, EyeOff } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
 import Notice from '@/components/ui/Notice';
@@ -6,12 +6,17 @@ import { useAuth } from '@/context/AuthContext';
 import { useState } from 'react';
 
 export default function LoginPage() {
-  const { login } = useAuth();
+  const { user, login } = useAuth();
   const [error, setError] = useState('');
   const [submitting, setSubmitting] = useState(false);
   const [visible, setVisible] = useState(false);
+  const [forgotOpen, setForgotOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
+
+  // ProtectedRoute saves the page they wanted before sending them here
+  const from = location.state?.from;
+  const target = from ? `${from.pathname}${from.search}${from.hash}` : '/';
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,14 +34,17 @@ export default function LoginPage() {
     setError('');
     try {
       await login({ identifier, password, remember });
-      // ProtectedRoute saved the page they wanted before sending them here; go back to it
-      const from = location.state?.from;
-      navigate(from ? `${from.pathname}${from.search}${from.hash}` : '/', { replace: true });
+      navigate(target, { replace: true });
     } catch (err) {
       setError(err.message || 'حدث خطأ أثناء تسجيل الدخول. الرجاء المحاولة لاحقاً.');
     } finally {
       setSubmitting(false);
     }
+  }
+
+  // Already logged in (and not in the middle of logging in): nothing to do here
+  if (user && !submitting) {
+    return <Navigate to={target} replace />;
   }
 
   return (
@@ -115,10 +123,24 @@ export default function LoginPage() {
                 <input type="checkbox" name="remember" className="checkbox checkbox-sm" />
                 تذكرني على هذا الجهاز
               </label>
-              <a href="#" className="text-small text-info hover:underline">
+              <button
+                type="button"
+                onClick={() => setForgotOpen((o) => !o)}
+                aria-expanded={forgotOpen}
+                aria-controls="forgot-help"
+                className="text-small text-info hover:underline"
+              >
                 نسيت كلمة المرور؟
-              </a>
+              </button>
             </div>
+
+            {forgotOpen && (
+              <div id="forgot-help">
+                <Notice tone="info" small title="استعادة كلمة المرور">
+                  استعادة كلمة المرور عبر البريد الإلكتروني غير متاحة حالياً، وستتوفر قريباً.
+                </Notice>
+              </div>
+            )}
 
             <button
               type="submit"

@@ -54,13 +54,6 @@ export const requestsByType = {
   'AB+': 0,
 };
 
-export const partnerHospitals = [
-  { name: 'مستشفى النور', place: 'مدينة نصر، القاهرة' },
-  { name: 'مستشفى الشفاء التخصصي', place: 'المعادي، القاهرة' },
-  { name: 'مستشفى الرحمة العام', place: 'الهرم، الجيزة' },
-  { name: 'مستشفى السلام الجامعي', place: 'سموحة، الإسكندرية' },
-];
-
 // What the status lookup "finds". Only status, hospital, blood type and units,
 // never names or phone numbers (privacy).
 export const lookupResults = {
