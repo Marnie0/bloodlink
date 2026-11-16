@@ -1,13 +1,11 @@
 import Brand from './Brand';
+import HeaderSearch from './HeaderSearch';
 import MainNav from './MainNav';
+import NotificationsMenu from './NotificationsMenu';
 import UserMenu from './UserMenu';
 import { Link } from 'react-router-dom';
-import { Bell, LogIn, Search } from 'lucide-react';
+import { LogIn } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
-
-function handleSearch(e) {
-  e.preventDefault();
-}
 
 export default function Header() {
   const { user } = useAuth();
@@ -16,32 +14,8 @@ export default function Header() {
       <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3">
         <Brand />
         <div className="flex items-center gap-2 md:gap-3">
-          <form
-            role="search"
-            onSubmit={handleSearch}
-            className="border-line bg-surface-2 hidden items-center rounded-full border ps-4 lg:flex"
-          >
-            <input
-              type="search"
-              placeholder="ابحث عن خدمة أو مستشفى"
-              aria-label="ابحث عن خدمة أو مستشفى"
-              className="w-64 bg-transparent py-2 outline-none"
-            />
-            <button
-              type="submit"
-              aria-label="بحث"
-              className="bg-navy m-1 grid size-9 place-items-center rounded-full text-white"
-            >
-              <Search className="size-4" />
-            </button>
-          </form>
-          <button
-            type="button"
-            aria-label="الإشعارات"
-            className="border-line grid size-11 shrink-0 place-items-center rounded-full border"
-          >
-            <Bell />
-          </button>
+          <HeaderSearch />
+          <NotificationsMenu />
           {user ? (
             <UserMenu />
           ) : (

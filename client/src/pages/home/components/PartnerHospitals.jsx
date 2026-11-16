@@ -5,7 +5,7 @@ const initial = (name) => name.replace(/^مستشفى\s+/, '').replace(/^ال/, 
 
 export default function PartnerHospitals({ hospitals }) {
   return (
-    <section aria-labelledby="partners-title" className="mt-7">
+    <section id="partners" aria-labelledby="partners-title" className="mt-7 scroll-mt-4">
       <h2 id="partners-title" className="mb-3 text-[1.15rem] font-bold">
         المستشفيات الشريكة
       </h2>
