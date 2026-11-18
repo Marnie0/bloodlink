@@ -11,7 +11,7 @@ import LoginPage from '@/pages/auth/LoginPage';
 import TermsPage from '@/pages/static/TermsPage';
 import NotFoundPage from '@/pages/static/NotFoundPage';
 import DonorRequestsPage from '@/pages/donor/DonorRequestsPage';
-import RequestDetailsPage from '@/pages/donor/RequestDetailsPage';
+import RequestDetailsRoute from '@/pages/donor/RequestDetailsRoute';
 import CertificatePage from '@/pages/donor/CertificatePage';
 import DonationHistoryPage from '@/pages/donor/DonationHistoryPage';
 import NewRequestPage from '@/pages/requester/NewRequestPage';
@@ -44,7 +44,7 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="donor" element={<DonorLayout />}>
               <Route path="requests" element={<DonorRequestsPage />} />
-              <Route path="requests/:id" element={<RequestDetailsPage />} />
+              <Route path="requests/:id" element={<RequestDetailsRoute />} />
               <Route path="certificate" element={<CertificatePage />} />
               <Route path="history" element={<DonationHistoryPage />} />
             </Route>
