@@ -44,7 +44,7 @@ export default function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="donor" element={<DonorLayout />}>
               <Route path="requests" element={<DonorRequestsPage />} />
-              <Route path="requests/:id" element={<RequestDetailsRoute />} />
+              <Route path="requests/:id" element={<RequestDetailsPage />} />
               <Route path="certificate" element={<CertificatePage />} />
               <Route path="history" element={<DonationHistoryPage />} />
             </Route>
