@@ -11,7 +11,6 @@ import LoginPage from '@/pages/auth/LoginPage';
 import TermsPage from '@/pages/static/TermsPage';
 import NotFoundPage from '@/pages/static/NotFoundPage';
 import DonorRequestsPage from '@/pages/donor/DonorRequestsPage';
-import RequestDetailsRoute from '@/pages/donor/RequestDetailsRoute';
 import CertificatePage from '@/pages/donor/CertificatePage';
 import DonationHistoryPage from '@/pages/donor/DonationHistoryPage';
 import NewRequestPage from '@/pages/requester/NewRequestPage';
@@ -25,6 +24,7 @@ import AdminPapersPage from '@/pages/admin/AdminPapersPage';
 import AdminReportsPage from '@/pages/admin/AdminReportsPage';
 import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
 import DonorLayout from '@/pages/donor/DonorLayout';
+import RequestDetailsPage from './pages/donor/RequestDetailsPage';
 export default function App() {
   const { pathname } = useLocation();
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');

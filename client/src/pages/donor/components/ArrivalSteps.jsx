@@ -3,7 +3,9 @@ import Button from '@/components/ui/Button';
 import Panel from '@/components/ui/Panel';
 import KeyValueTable from '@/components/ui/KeyValueTable';
 
-export default function ArrivalSteps({ guide, summary = [], directionsLabel, onCancel }) {
+
+export default function ArrivalSteps({ guide, summary = [], directionsLabel, directionsHref, onCancel }) {
+
   return (
     <Panel title={guide.heading} className="min-w-0">
       <ol className="m-0 list-none p-0">
@@ -28,7 +30,11 @@ export default function ArrivalSteps({ guide, summary = [], directionsLabel, onC
       {summary.length > 0 && <KeyValueTable rows={summary} className="mt-4" />}
 
       <div className="mt-4 flex flex-wrap items-center gap-2">
-        <Button icon={Navigation}>{directionsLabel}</Button>
+
+        <Button as="a" href={directionsHref} target="_blank" rel="noopener noreferrer" icon={Navigation}>
+          {directionsLabel}
+        </Button>
+
         <Button variant="link" size="sm" onClick={onCancel}>
           إلغاء الموافقة
         </Button>

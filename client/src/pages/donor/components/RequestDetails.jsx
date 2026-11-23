@@ -5,14 +5,11 @@ import Ref from '@/components/ui/Ref';
 import KeyValueTable from '@/components/ui/KeyValueTable';
 import Tag from '@/components/ui/Tag';
 import TrustBadge from '@/components/ui/TrustBadge';
-import { notices } from '../requestDetailsData';
-import { useRequestDetails } from '../RequestDetailsContext';
 import FactGrid from './FactGrid';
 
-export default function RequestDetails() {
-  const { request, openAccept, decline, openReport } = useRequestDetails();
+export default function RequestDetails({ request, notice, onAccept, onDecline, onReport }) {
   const { hospital, requester } = request;
-  const notice = notices.find((n) => n.id === 'before-accept');
+
 
   const facts = [
     {
@@ -53,8 +50,10 @@ export default function RequestDetails() {
         <span className="text-tiny text-ink-3">
           طلب رقم <Ref>{request.id}</Ref> · {request.publishedAgo}
         </span>
-        <TrustBadge level="verified" icon={<ShieldCheck aria-hidden className="size-3.5" />}>
-          طلب موثّق · مستشفى شريك
+        <TrustBadge level={request.trust} icon={<ShieldCheck aria-hidden className="size-3.5" />}>
+          {request.trust === 'verified'
+            ? `طلب موثّق${hospital.partner ? ' · مستشفى شريك' : ''}`
+            : 'ورقة تبدو سليمة'}
         </TrustBadge>
       </div>
 
@@ -68,15 +67,19 @@ export default function RequestDetails() {
       </Notice>
 
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
-        <Button icon={Heart} className="flex-1" aria-haspopup="dialog" onClick={openAccept}>
+
+        <Button icon={Heart} className="flex-1" aria-haspopup="dialog" onClick={onAccept}>
           نعم، أستطيع التبرع
         </Button>
-        <Button variant="ghost" className="flex-1" onClick={decline}>
+        <Button variant="ghost" className="flex-1" onClick={onDecline}>
+
           لا أستطيع هذه المرة
         </Button>
       </div>
 
-      <Button variant="link" size="sm" className="mt-1.5" aria-haspopup="dialog" onClick={openReport}>
+
+      <Button variant="link" size="sm" className="mt-1.5" aria-haspopup="dialog" onClick={onReport}>
+
         الإبلاغ عن هذا الطلب
       </Button>
     </article>

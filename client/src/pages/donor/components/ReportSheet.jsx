@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import BottomSheet from '@/components/ui/BottomSheet';
 import Button from '@/components/ui/Button';
-import { reportReasons } from '../requestDetailsData';
-import { useRequestDetails } from '../RequestDetailsContext';
 
-export default function ReportSheet() {
-  const { sheet, closeSheet, request, submitReport } = useRequestDetails();
+
+export default function ReportSheet({ open, onClose, requestId, reasons = [], onSubmit }) {
+
   const [reason, setReason] = useState('');
   const [note, setNote] = useState('');
 
@@ -15,24 +14,29 @@ export default function ReportSheet() {
   };
   const close = () => {
     reset();
-    closeSheet();
+
+    onClose();
   };
   const submit = () => {
-    submitReport({ targetType: 'request', targetId: request.id, reason, note: note.trim() });
+    onSubmit({ targetType: 'request', targetId: requestId, reason, note: note.trim() });
+
     reset();
   };
 
   return (
     <BottomSheet
-      open={sheet === 'report'}
+
+      open={open}
       onClose={close}
-      eyebrow={request.id}
+      eyebrow={requestId}
+
       title="الإبلاغ عن هذا الطلب"
       description="يراجع فريقنا كل بلاغ. اختر السبب الأقرب."
     >
       <fieldset className="mt-3 grid gap-2 border-0 p-0">
         <legend className="sr-only">سبب الإبلاغ</legend>
-        {reportReasons.map((r) => (
+        {reasons.map((r) => (
+
           <label
             key={r.id}
             className="rounded-tile border-line bg-surface-2 text-small has-[:checked]:border-crimson has-[:checked]:bg-crimson-lt flex cursor-pointer items-center gap-3 border px-3.5 py-3"
