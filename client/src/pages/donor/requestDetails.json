@@ -1,0 +1,110 @@
+{
+  "requests": [
+    {
+      "id": "BL-2026-004213",
+      "status": "active",
+      "trust": "verified",
+      "bloodType": "O+",
+      "compatibleWithMe": true,
+      "unitsNeeded": 3,
+      "unitsPledged": 1,
+      "deadlineLabel": "الغد، 6:00 ص",
+      "urgency": "urgent",
+      "urgencyLabel": "عاجل",
+      "publishedAgo": "نُشر منذ ٦ ساعات",
+      "reason": "عملية جراحية مجدولة",
+      "department": "قسم الجراحة",
+      "paperConfirmedAt": "21/10/2026",
+      "hospital": {
+        "id": "HP-0007",
+        "name": "مستشفى النور",
+        "area": "مدينة نصر",
+        "partner": true,
+        "address": "١٤ شارع مصطفى النحاس، مدينة نصر",
+        "bloodBank": "المبنى ب · الدور الأرضي",
+        "hours": "9:00 ص – 9:00 م",
+        "distanceLabel": "2.4 كم · 12 دقيقة",
+        "location": { "lat": 30.0626, "lng": 31.3449 }
+      },
+      "requester": {
+        "name": "سارة إبراهيم",
+        "short": "سارة إ.",
+        "initials": "سإ",
+        "relation": "ابنة المريض",
+        "roleLabel": "صاحبة الطلب · ابنة المريض",
+        "phoneHint": "يظهر رقمها بعد موافقتك",
+        "phoneHref": "tel:+201000000012"
+      }
+    },
+    {
+      "id": "BL-2026-004205",
+      "status": "active",
+      "trust": "looks_valid",
+      "bloodType": "A+",
+      "compatibleWithMe": true,
+      "unitsNeeded": 2,
+      "unitsPledged": 1,
+      "deadlineLabel": "اليوم، 8:00 م",
+      "urgency": "normal",
+      "urgencyLabel": "عادي",
+      "publishedAgo": "نُشر منذ ٣ ساعات",
+      "reason": "حالة طارئة",
+      "department": "قسم الطوارئ",
+      "paperConfirmedAt": "21/10/2026",
+      "hospital": {
+        "id": "HP-0031",
+        "name": "مستشفى الرحمة العام",
+        "area": "العباسية",
+        "partner": false,
+        "address": "شارع رمسيس، العباسية",
+        "bloodBank": null,
+        "hours": null,
+        "distanceLabel": "6.1 كم · 22 دقيقة",
+        "location": { "lat": 30.0714, "lng": 31.2834 }
+      },
+      "requester": {
+        "name": "محمد كمال",
+        "short": "محمد ك.",
+        "initials": "مك",
+        "relation": "ابن المريض",
+        "roleLabel": "صاحب الطلب · ابن المريض",
+        "phoneHint": "يظهر رقمه بعد موافقتك",
+        "phoneHref": "tel:+201000000034"
+      }
+    }
+  ],
+
+  "pledges": [
+    {
+      "requestId": "BL-2026-004213",
+      "id": "AP-2026-118204",
+      "code": "AP-118204",
+      "validUntilLabel": "23/10 · 6:00 ص",
+      "canSelfConfirm": false,
+      "notice": {
+        "title": "تم تسجيل موافقتك بنجاح - شكراً لك يا أحمد",
+        "text": "أرسلنا رسالة نصية بالتفاصيل، وأبلغنا صاحبة الطلب والمستشفى. رقم الموعد"
+      },
+      "summary": [
+        { "label": "المتبرع", "value": "أحمد محمود · O+" },
+        { "label": "الموعد", "value": "اليوم · قبل 8:00 م" }
+      ],
+      "directionsLabel": "الاتجاهات · ١٢ دقيقة",
+      "contactNote": "رقم هاتفك ظاهر لصاحب الطلب منذ موافقتك فقط."
+    },
+    {
+      "requestId": "BL-2026-004205",
+      "id": "AP-2026-118211",
+      "code": null,
+      "validUntilLabel": null,
+      "canSelfConfirm": false,
+      "notice": {
+        "title": "تم تسجيل موافقتك - شكراً لك يا أحمد",
+        "text": "أبلغنا صاحب الطلب، ويمكنكما الآن رؤية رقمي الهاتف للتنسيق."
+      },
+      "summary": [],
+      "directionsLabel": "الاتجاهات",
+      "contactNote": "رقم هاتفك ظاهر لصاحب الطلب منذ موافقتك فقط."
+    }
+  ]
+}
