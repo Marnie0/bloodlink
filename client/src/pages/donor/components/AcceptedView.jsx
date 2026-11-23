@@ -4,6 +4,7 @@ import QrTicket from './QrTicket';
 import NoQrCard from './NoQrCard';
 import ArrivalSteps from './ArrivalSteps';
 
+
 export default function AcceptedView({ request, pledge, guide, onCancel, onSelfConfirm }) {
   const partner = request.hospital.partner;
   const { location, name, address } = request.hospital;
@@ -12,11 +13,14 @@ export default function AcceptedView({ request, pledge, guide, onCancel, onSelfC
 
   return (
     <div className="grid gap-[18px]">
+
       <Notice tone="ok" live title={pledge.notice.title}>
         {pledge.notice.text} {partner && <Ref>{pledge.id}</Ref>}
       </Notice>
 
+
       <div className="grid gap-[18px] md:grid-cols-[300px_minmax(0,1fr)]">
+
         {partner ? (
           <QrTicket pledge={pledge} hospitalName={request.hospital.name} />
         ) : (
@@ -24,6 +28,7 @@ export default function AcceptedView({ request, pledge, guide, onCancel, onSelfC
             hospitalName={request.hospital.name}
             canConfirm={pledge.canSelfConfirm}
             onConfirm={onSelfConfirm}
+
           />
         )}
         <ArrivalSteps
@@ -32,6 +37,7 @@ export default function AcceptedView({ request, pledge, guide, onCancel, onSelfC
           directionsLabel={pledge.directionsLabel}
           directionsHref={directionsHref}
           onCancel={onCancel}
+
         />
       </div>
     </div>

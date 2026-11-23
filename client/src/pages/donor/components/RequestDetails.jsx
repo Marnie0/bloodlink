@@ -10,6 +10,7 @@ import FactGrid from './FactGrid';
 export default function RequestDetails({ request, notice, onAccept, onDecline, onReport }) {
   const { hospital, requester } = request;
 
+
   const facts = [
     {
       label: 'الفصيلة المطلوبة',
@@ -66,15 +67,19 @@ export default function RequestDetails({ request, notice, onAccept, onDecline, o
       </Notice>
 
       <div className="mt-4 flex flex-col gap-2 sm:flex-row">
+
         <Button icon={Heart} className="flex-1" aria-haspopup="dialog" onClick={onAccept}>
           نعم، أستطيع التبرع
         </Button>
         <Button variant="ghost" className="flex-1" onClick={onDecline}>
+
           لا أستطيع هذه المرة
         </Button>
       </div>
 
+
       <Button variant="link" size="sm" className="mt-1.5" aria-haspopup="dialog" onClick={onReport}>
+
         الإبلاغ عن هذا الطلب
       </Button>
     </article>

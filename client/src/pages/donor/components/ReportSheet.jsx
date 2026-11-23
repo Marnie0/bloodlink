@@ -2,7 +2,9 @@ import { useState } from 'react';
 import BottomSheet from '@/components/ui/BottomSheet';
 import Button from '@/components/ui/Button';
 
+
 export default function ReportSheet({ open, onClose, requestId, reasons = [], onSubmit }) {
+
   const [reason, setReason] = useState('');
   const [note, setNote] = useState('');
 
@@ -12,24 +14,29 @@ export default function ReportSheet({ open, onClose, requestId, reasons = [], on
   };
   const close = () => {
     reset();
+
     onClose();
   };
   const submit = () => {
     onSubmit({ targetType: 'request', targetId: requestId, reason, note: note.trim() });
+
     reset();
   };
 
   return (
     <BottomSheet
+
       open={open}
       onClose={close}
       eyebrow={requestId}
+
       title="الإبلاغ عن هذا الطلب"
       description="يراجع فريقنا كل بلاغ. اختر السبب الأقرب."
     >
       <fieldset className="mt-3 grid gap-2 border-0 p-0">
         <legend className="sr-only">سبب الإبلاغ</legend>
         {reasons.map((r) => (
+
           <label
             key={r.id}
             className="rounded-tile border-line bg-surface-2 text-small has-[:checked]:border-crimson has-[:checked]:bg-crimson-lt flex cursor-pointer items-center gap-3 border px-3.5 py-3"

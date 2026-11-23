@@ -1,3 +1,4 @@
+
 import { useCallback, useState } from 'react';
 import { Banknote, Building2, Check, Heart, SearchX, ShieldCheck } from 'lucide-react';
 import Breadcrumb from '@/components/ui/Breadcrumb';
@@ -334,5 +335,6 @@ export default function RequestDetailsPage({ initialView = 'before' }) {
     <RequestsContext>
       <Content requestId={id} initialView={initialView} />
     </RequestsContext>
+
   );
 }
