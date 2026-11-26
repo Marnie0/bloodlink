@@ -19,19 +19,28 @@ function fail(status, message) {
   throw error;
 }
 
-async function postJson(path, body) {
+// One place that talks to the server. body → sent as JSON; token → "Authorization: Bearer …"
+async function request(path, { method = 'GET', body, token } = {}) {
   if (!API_URL) {
     throw new Error('VITE_API_URL is missing: create client/.env.local (see .env.example)');
   }
+  const headers = {};
+  if (body) headers['Content-Type'] = 'application/json';
+  if (token) headers.Authorization = `Bearer ${token}`;
+
   try {
     return await fetch(`${API_URL}${path}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body),
+      method,
+      headers,
+      body: body ? JSON.stringify(body) : undefined,
     });
   } catch {
     fail(0, MESSAGES.network);
   }
+}
+
+function postJson(path, body) {
+  return request(path, { method: 'POST', body });
 }
 
 export async function loginRequest({ identifier, password }) {
@@ -48,12 +57,24 @@ export async function loginRequest({ identifier, password }) {
   const user = data.user ?? data;
 
   return {
-    id: user.id,
-    name: user.name ?? cleaned,
-    email: user.email ?? cleaned,
-    phone: user.phone ?? '',
-    roles: user.roles ?? ['donor'],
+    user: {
+      id: user.id,
+      name: user.name ?? cleaned,
+      email: user.email ?? cleaned,
+      phone: user.phone ?? '',
+      roles: user.roles ?? ['donor'],
+    },
+    token: data.token ?? null,
   };
+}
+
+// Asks the server whether a saved token still works (it expires after 1 hour).
+// false = the server refused it (401/403) → log out.
+// true  = accepted, or the server had another problem (5xx): don't log anyone out for that.
+// A network error throws, and the caller keeps the user logged in (they may just be offline).
+export async function isTokenValid(token) {
+  const response = await request('/users/me', { token });
+  return response.status !== 401 && response.status !== 403;
 }
 
 export async function signupRequest({ name, email, password }) {

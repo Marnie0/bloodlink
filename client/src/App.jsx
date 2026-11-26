@@ -4,13 +4,13 @@ import AdminLayout from '@/pages/admin/AdminLayout';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import BottomTabBar from '@/components/layout/BottomTabBar';
+import ProtectedRoute from '@/components/layout/ProtectedRoute';
 import HomePage from '@/pages/home/HomePage';
 import SignupPage from '@/pages/auth/SignupPage';
 import LoginPage from '@/pages/auth/LoginPage';
 import TermsPage from '@/pages/static/TermsPage';
 import NotFoundPage from '@/pages/static/NotFoundPage';
 import DonorRequestsPage from '@/pages/donor/DonorRequestsPage';
-import RequestDetailsPage from '@/pages/donor/RequestDetailsPage';
 import CertificatePage from '@/pages/donor/CertificatePage';
 import DonationHistoryPage from '@/pages/donor/DonationHistoryPage';
 import NewRequestPage from '@/pages/requester/NewRequestPage';
@@ -24,6 +24,7 @@ import AdminPapersPage from '@/pages/admin/AdminPapersPage';
 import AdminReportsPage from '@/pages/admin/AdminReportsPage';
 import AdminHospitalsPage from '@/pages/admin/AdminHospitalsPage';
 import DonorLayout from '@/pages/donor/DonorLayout';
+import RequestDetailsPage from './pages/donor/RequestDetailsPage';
 export default function App() {
   const { pathname } = useLocation();
   const isAdmin = pathname === '/admin' || pathname.startsWith('/admin/');
@@ -38,31 +39,34 @@ export default function App() {
           <Route path="login" element={<LoginPage />} />
           <Route path="terms" element={<TermsPage />} />
 
-          <Route path="donor" element={<DonorLayout />}>
-            <Route path="requests" element={<DonorRequestsPage />} />
-            <Route path="requests/:id" element={<RequestDetailsPage />} />
-            <Route path="certificate" element={<CertificatePage />} />
-            <Route path="history" element={<DonationHistoryPage />} />
-          </Route>
+          <Route path="hospital/join" element={<HospitalJoinPage />} />
 
-          <Route path="requests">
-            <Route path="new/:step?" element={<NewRequestPage />} />
-            <Route path=":id" element={<RequestProgressPage />} />
-            <Route path=":id/confirm" element={<ConfirmDonationPage />} />
-          </Route>
+          <Route element={<ProtectedRoute />}>
+            <Route path="donor" element={<DonorLayout />}>
+              <Route path="requests" element={<DonorRequestsPage />} />
+              <Route path="requests/:id" element={<RequestDetailsPage />} />
+              <Route path="certificate" element={<CertificatePage />} />
+              <Route path="history" element={<DonationHistoryPage />} />
+            </Route>
 
-          <Route path="hospital">
-            <Route index element={<HospitalDashboardPage />} />
-            <Route path="papers" element={<HospitalPapersPage />} />
-            <Route path="join" element={<HospitalJoinPage />} />
-          </Route>
+            <Route path="requests">
+              <Route path="new/:step?" element={<NewRequestPage />} />
+              <Route path=":id" element={<RequestProgressPage />} />
+              <Route path=":id/confirm" element={<ConfirmDonationPage />} />
+            </Route>
 
-          <Route path="admin" element={<AdminLayout />}>
-            <Route index element={<AdminDashboardPage />} />
-            <Route path="papers" element={<AdminPapersPage />} />
-            <Route path="reports" element={<AdminReportsPage />} />
-            <Route path="hospitals" element={<AdminHospitalsPage />} />
-            <Route path="*" element={<NotFoundPage />} />
+            <Route path="hospital">
+              <Route index element={<HospitalDashboardPage />} />
+              <Route path="papers" element={<HospitalPapersPage />} />
+            </Route>
+
+            <Route path="admin" element={<AdminLayout />}>
+              <Route index element={<AdminDashboardPage />} />
+              <Route path="papers" element={<AdminPapersPage />} />
+              <Route path="reports" element={<AdminReportsPage />} />
+              <Route path="hospitals" element={<AdminHospitalsPage />} />
+              <Route path="*" element={<NotFoundPage />} />
+            </Route>
           </Route>
 
           <Route path="*" element={<NotFoundPage />} />
