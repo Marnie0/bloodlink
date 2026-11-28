@@ -32,7 +32,7 @@ export const HOSPITALS = [
 ];
 
 // حدود رفع الورقة (US-02: 5 ميجا)
-export const MAX_FILE_MB = 5;
+export const MAX_FILE_MB = 4;
 export const ACCEPTED_FILES = ['image/jpeg', 'image/png', 'application/pdf'];
 
 // نصوص نتيجة الفحص (FR-10: النصوص ثابتة، والفحص الآلي عمره ما يقول "أصلية")
